@@ -1,5 +1,7 @@
 package org.pam.entities;
 
-public class Historique {
+import java.io.Serializable;
+
+public class Historique implements Serializable {
 
 }
