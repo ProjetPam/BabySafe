@@ -28,6 +28,12 @@ public class Enfants implements Serializable{
 	
 	
 	
+	public Utilisateurs getUtilisateur() {
+		return utilisateur;
+	}
+	public void setUtilisateur(Utilisateurs utilisateur) {
+		this.utilisateur = utilisateur;
+	}
 	public Enfants(String nom, String prenom, String niveau_etude,
 			String photo, String age, String maladie) {
 		super();

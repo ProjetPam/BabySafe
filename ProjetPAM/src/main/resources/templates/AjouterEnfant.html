@@ -1,13 +1,48 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" 
-xmlns:layout="www.ultraq.net.nz/thymeleaf/layout">
+xmlns:layout="www.ultraq.net.nz/thymeleaf/layout"
+layout:decorator="template1">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8"/>
+	
 <title>Insert title here</title>
 </head>
 <body>
 <div layout:fragment="content">
-dskjdsjkdnskdsjdnksnkjdsdnskdnskjdnjsk
+<form th:action="@{/AddEnfant}" method="get">
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">Nom</label>
+      <input  class="form-control" id="Nom" name="Nom" placeholder="Nom"/>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputPassword4">Prénom</label>
+      <input  class="form-control" id="Prénom" name="Prénom" placeholder="Prénom"/>
+    </div>
+  </div>
+   <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">Niveau d'études</label>
+      <input  class="form-control" id="NiveauEtud" name="NiveauEtud" placeholder="Niveau d'études"/>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputPassword4">Age</label>
+      <input  class="form-control" id="Age" name="Age" placeholder="Age"/>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">Maladie</label>
+      <input  class="form-control" id="Maladie" name="Maladie" placeholder="Maladie"/>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputPassword4">Photo</label>
+      <input  class="form-control" id="Photo" name="Photo" placeholder="Photo"/>
+    </div>
+  </div>
+  
+  <button type="submit" class="btn btn-primary">Sign in</button>
+</form>
 </div>
 </body>
 </html>
