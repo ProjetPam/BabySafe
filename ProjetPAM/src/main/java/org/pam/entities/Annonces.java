@@ -4,13 +4,26 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class Annonces implements Serializable {
 
+	@Id
+	@GeneratedValue
 	private int numero_annonce;
 	private Date date_annonce;
 	private Timestamp heure_depart;
 	private Timestamp heure_fini;
 	private String description;
+	
+	@ManyToOne
+	@JoinColumn(name="CODE_UTILISATEUR")
+	private Utilisateurs utilisateur;
 	
 	
 	
@@ -58,6 +71,13 @@ public class Annonces implements Serializable {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	public Utilisateurs getUtilisateur() {
+		return utilisateur;
+	}
+	public void setUtilisateur(Utilisateurs utilisateur) {
+		this.utilisateur = utilisateur;
+	}
+	
 	
 	
 	

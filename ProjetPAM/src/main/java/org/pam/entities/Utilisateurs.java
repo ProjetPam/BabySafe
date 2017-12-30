@@ -24,6 +24,9 @@ public class Utilisateurs implements Serializable {
 	@OneToMany(mappedBy="utilisateur",fetch=FetchType.LAZY)
 	private Collection<Enfants> enfants;
 	
+    @OneToMany(mappedBy="utilisateur",fetch=FetchType.LAZY)
+	private Collection<Annonces> annonces;
+	
 	public Collection<Enfants> getEnfants() {
 		return enfants;
 	}
@@ -77,6 +80,14 @@ public class Utilisateurs implements Serializable {
 		this.email = email;
 		this.password = password;
 	}
+	public Collection<Annonces> getAnnonces() {
+		return annonces;
+	}
+	public void setAnnonces(Collection<Annonces> annonces) {
+		this.annonces = annonces;
+	}
+	
+	
 	
 	
 	
