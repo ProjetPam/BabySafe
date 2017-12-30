@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+xmlns:layout="www.ultraq.net.nz/thymeleaf/layout"
+layout:decorator="template1">
+<head>
+<meta charset="UTF-8"/>
+<title>Insert title here</title>
+</head>
+<body>
+<div layout:fragment="content">
+<form th:action="@{/AddAnnonce}" method="post">
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">Date Annonce</label>
+      <input  class="form-control" id="DateAnnonce" name="DateAnnonce" placeholder="Date Annonce"/>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputPassword4">Heure départ</label>
+      <input  class="form-control"  name="heure_depart" placeholder="Heure départ"/>
+    </div>
+  </div>
+   <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="inputEmail4">Heure fin</label>
+      <input  class="form-control"  name="heure_fini" placeholder="Heure fin"/>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="inputPassword4">Description</label>
+      <input  class="form-control" id="description" name="description" placeholder="Description"/>
+    </div>
+  </div>
+  
+  
+  <button type="submit" class="btn btn-primary">Publier annonce</button>
+</form>
+
+
+</div>
+
+
+</body>
+</html>
