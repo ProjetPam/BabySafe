@@ -1,28 +1,43 @@
-package org.pam.controllers;
+package org.pam.controlleur;
 
 import java.sql.Timestamp;
 import java.util.Date;
 
-import org.pam.entities.Annonces;
-import org.pam.metier.MetierAnnonces;
+import org.pam.model.Annonce;
+import org.pam.service.AnnonceService;
+import org.pam.service.EnfantService;
+import org.pam.service.UtilisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class ControllerAnnonces {
+public class ControllerAnnonces implements IControllerAnnonce {
 
 	@Autowired
-    private MetierAnnonces metierAnnonces;
+    private AnnonceService annonceService;
 	
+	@Autowired
+    private EnfantService enfantService;
 	
+	@Autowired
+    private UtilisateurService utilisateurService;
+	
+	/* (non-Javadoc)
+	 * @see org.pam.controlleur.IControllerAnnonce#ajouterAnnonce(org.springframework.ui.Model, java.util.Date, java.lang.String, java.lang.String, java.lang.String)
+	 */
+	@Override
 	@RequestMapping("/ajouterAnnonce")
 	public String ajouterAnnonce(Model model,Date DateAnnonce,String heure_depart,String heure_fini,String description){
 		
 			
 		return "AjouterAnnonce";
 	}
+	/* (non-Javadoc)
+	 * @see org.pam.controlleur.IControllerAnnonce#addAnnonce(org.springframework.ui.Model, java.util.Date, java.lang.String, java.lang.String, java.lang.String)
+	 */
+	@Override
 	@RequestMapping("/AddAnnonce")
 	public String addAnnonce(Model model,Date DateAnnonce,String heure_depart,String heure_fini,String description){
 		try {
@@ -38,9 +53,9 @@ public class ControllerAnnonces {
 			int minuteFin1 = Integer.valueOf(heure_fini.substring(3, 5));
 			 Timestamp heuredepart =new Timestamp(0000, 00, 00, heureDep, minuteDep,00,00);
 			 Timestamp heurefin =new Timestamp(2000, 00, 00, heureDep1, minuteFin1,00,00);
-			   Annonces annonce=new Annonces(DateAnnonce, heuredepart, heurefin, description);
-			//Annonces annonce=new Annonces(datAnn, ts1, ts2, desc);
-			metierAnnonces.ajouterAnnonce(annonce, 1);
+			   Annonce annonce=new Annonce(DateAnnonce, heuredepart, heurefin, description);
+			//Annonce annonce=new Annonce(datAnn, ts1, ts2, desc);
+			annonceService.ajouterAnnonce(annonce, 1);
 			
 		} catch (Exception e) {
 			e.printStackTrace();		
@@ -49,17 +64,27 @@ public class ControllerAnnonces {
 		return "AjouterAnnonce";
 	}
 	
+	/* (non-Javadoc)
+	 * @see org.pam.controlleur.IControllerAnnonce#ajouterAnnonce(org.springframework.ui.Model)
+	 */
+	@Override
 	@RequestMapping("/ListeAnnonces")
 	public String ajouterAnnonce(Model model){
-		model.addAttribute("listAnnonce",metierAnnonces.getAllAnnonces());
+		model.addAttribute("listAnnonce",annonceService.getAllAnnonces());
 		return "ListeAnnonces";
 	}
 	
 	
 	
+	/* (non-Javadoc)
+	 * @see org.pam.controlleur.IControllerAnnonce#Reservation(org.springframework.ui.Model, int)
+	 */
+	@Override
 	@RequestMapping("/Reservation")
 	public String Reservation(Model model,int idAnnonce){
-		model.addAttribute("Annonce",metierAnnonces.getAnnonceByID(idAnnonce));
+		model.addAttribute("nombrePoints", utilisateurService.getUtilisateurById(1));
+		model.addAttribute("ListeEnfants",enfantService.getEnfantsByUtilisateur(1));
+		model.addAttribute("Annonce",annonceService.getAnnonceByID(idAnnonce));
 		return "Paiement";
 	}
 	

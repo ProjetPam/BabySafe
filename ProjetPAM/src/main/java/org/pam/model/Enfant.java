@@ -1,15 +1,17 @@
-package org.pam.entities;
+package org.pam.model;
 
 import java.io.Serializable;
+import java.util.Collection;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
-public class Enfants implements Serializable{
+public class Enfant implements Serializable{
 
 	@Id
 	@GeneratedValue
@@ -22,19 +24,27 @@ public class Enfants implements Serializable{
 	private String maladie;
 	@ManyToOne
 	@JoinColumn(name="CODE_UTILISATEUR")
-	private Utilisateurs utilisateur;
+	private Utilisateur utilisateur;
+	
+	@OneToMany(mappedBy="enfant")
+	private Collection<Reservation> reservation;
 	
 	
 	
 	
-	
-	public Utilisateurs getUtilisateur() {
+	public Collection<Reservation> getReservation() {
+		return reservation;
+	}
+	public void setReservation(Collection<Reservation> reservation) {
+		this.reservation = reservation;
+	}
+	public Utilisateur getUtilisateur() {
 		return utilisateur;
 	}
-	public void setUtilisateur(Utilisateurs utilisateur) {
+	public void setUtilisateur(Utilisateur utilisateur) {
 		this.utilisateur = utilisateur;
 	}
-	public Enfants(String nom, String prenom, String niveau_etude,
+	public Enfant(String nom, String prenom, String niveau_etude,
 			String photo, String age, String maladie) {
 		super();
 		this.nom = nom;
@@ -44,7 +54,7 @@ public class Enfants implements Serializable{
 		this.age = age;
 		this.maladie = maladie;
 	}
-	public Enfants() {
+	public Enfant() {
 		super();
 		// TODO Auto-generated constructor stub
 	}

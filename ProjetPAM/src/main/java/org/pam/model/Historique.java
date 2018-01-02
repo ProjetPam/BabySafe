@@ -1,4 +1,4 @@
-package org.pam.entities;
+package org.pam.model;
 
 import java.io.Serializable;
 
