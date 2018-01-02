@@ -35,12 +35,13 @@ public class Annonce implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 	public Annonce(Date date_annonce, Timestamp heure_depart,
-			Timestamp heure_fini, String description) {
+			Timestamp heure_fini, String description,Double prix) {
 		super();
 		this.date_annonce = date_annonce;
 		this.heure_depart = heure_depart;
 		this.heure_fini = heure_fini;
 		this.description = description;
+		this.prix=prix;
 	}
 	
 	public Double getPrix() {

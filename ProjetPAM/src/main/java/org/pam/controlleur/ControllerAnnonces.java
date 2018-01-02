@@ -29,7 +29,7 @@ public class ControllerAnnonces implements IControllerAnnonce {
 	 */
 	@Override
 	@RequestMapping("/ajouterAnnonce")
-	public String ajouterAnnonce(Model model,Date DateAnnonce,String heure_depart,String heure_fini,String description){
+	public String ajouterAnnonce(Model model,Date DateAnnonce,String heure_depart,String heure_fini,String description,Double prix){
 		
 			
 		return "AjouterAnnonce";
@@ -39,7 +39,7 @@ public class ControllerAnnonces implements IControllerAnnonce {
 	 */
 	@Override
 	@RequestMapping("/AddAnnonce")
-	public String addAnnonce(Model model,Date DateAnnonce,String heure_depart,String heure_fini,String description){
+	public String addAnnonce(Model model,Date DateAnnonce,String heure_depart,String heure_fini,String description,Double prix){
 		try {
 			//Date datAnn = new Date() ;
 			
@@ -53,7 +53,7 @@ public class ControllerAnnonces implements IControllerAnnonce {
 			int minuteFin1 = Integer.valueOf(heure_fini.substring(3, 5));
 			 Timestamp heuredepart =new Timestamp(0000, 00, 00, heureDep, minuteDep,00,00);
 			 Timestamp heurefin =new Timestamp(2000, 00, 00, heureDep1, minuteFin1,00,00);
-			   Annonce annonce=new Annonce(DateAnnonce, heuredepart, heurefin, description);
+			   Annonce annonce=new Annonce(DateAnnonce, heuredepart, heurefin, description,prix);
 			//Annonce annonce=new Annonce(datAnn, ts1, ts2, desc);
 			annonceService.ajouterAnnonce(annonce, 1);
 			
@@ -69,7 +69,7 @@ public class ControllerAnnonces implements IControllerAnnonce {
 	 */
 	@Override
 	@RequestMapping("/ListeAnnonces")
-	public String ajouterAnnonce(Model model){
+	public String ajouterAnnonce(Model model) throws Exception{
 		model.addAttribute("listAnnonce",annonceService.getAllAnnonces());
 		return "ListeAnnonces";
 	}
@@ -81,11 +81,16 @@ public class ControllerAnnonces implements IControllerAnnonce {
 	 */
 	@Override
 	@RequestMapping("/Reservation")
-	public String Reservation(Model model,int idAnnonce){
+	public String Reservation(Model model,int idAnnonce) throws Exception{
 		model.addAttribute("nombrePoints", utilisateurService.getUtilisateurById(1));
 		model.addAttribute("ListeEnfants",enfantService.getEnfantsByUtilisateur(1));
 		model.addAttribute("Annonce",annonceService.getAnnonceByID(idAnnonce));
 		return "Paiement";
+	}
+	@Override
+	public String paiement(Model model, int idenfant, int idAnnonce, Double prix,Integer poinUtiliser) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	
