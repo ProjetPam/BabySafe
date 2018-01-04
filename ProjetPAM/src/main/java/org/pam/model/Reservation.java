@@ -25,6 +25,18 @@ public class Reservation {
 	@JoinColumn(name = "idEnfant")
 	private Enfant enfant ;
 	
+	@ManyToOne
+	@JoinColumn(name = "idAnnonce")
+	private Annonce annonce ;
+	
+	
+	public Annonce getAnnonce() {
+		return annonce;
+	}
+
+	public void setAnnonce(Annonce annonce) {
+		this.annonce = annonce;
+	}
 	private Double prix ;
 	private Integer pointUtilise ;
 	
@@ -33,13 +45,14 @@ public class Reservation {
 	}
 
 	public Reservation(Date dateReservation, Utilisateur utilisateur, Enfant enfant, Double prix,
-			Integer pointUtilise) {
+			Integer pointUtilise,Annonce annonce) {
 		super();
 		this.dateReservation = dateReservation;
 		this.utilisateur = utilisateur;
 		this.enfant = enfant;
 		this.prix = prix;
 		this.pointUtilise = pointUtilise;
+		this.annonce=annonce;
 	}
 	
 	public Long getIdReservation() {

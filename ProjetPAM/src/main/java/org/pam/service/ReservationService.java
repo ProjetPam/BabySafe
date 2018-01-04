@@ -7,5 +7,6 @@ import org.pam.model.Utilisateur;
 
 public interface ReservationService {
 	
-	public void ajouterReservation(Utilisateur utilisateur, Enfant enfant, Date dateResevation, Double prix, Integer pointUtilise);
+	public void ajouterReservation(int idAnnonce ,int idUtilisateur,int  IdEnfant, Date dateResevation,Double prix, Integer pointUtilise);
+	
 }

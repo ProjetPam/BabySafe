@@ -10,16 +10,52 @@ layout:decorator="template1">
 <div layout:fragment="content">
 
 <div th:each="Annonce:${Annonce}" class="card" style="color: black;border-color: black;border-style: solid double; border-width: 4px ">
- <form action="Paiement" method="post">
- <p th:each="nb: ${nombrePoints}">
+ <form   th:action="@{/Paiement}"  method="post">
+ 
+    <br/>
+
+		
+		
+		
+		
+		<div class="container">
+    
+        <div class="col-md-6">
+          <div class="panel panel-primary">
+            <div class="panel-heading">4 colonnes</div>
+           <div class="panel-body">
+
+<p th:each="nb: ${nombrePoints}">
     
   Le nombre de points que vous avez : <input  name="nombre_points" th:value="${nb.nombre_points}" ></input>
     </p>
-    <br/>
- choisissez un enfant<select name="idenfant">
+
+
+
+
+
+           </div>
+
+          </div>
+        </div>
+           <div class="col-md-6">
+          <div class="panel panel-primary">
+            <div class="panel-heading">4 colonnes</div>
+           <div class="panel-body">
+
+              
+                choisissez un enfant<select name="idenfant">
   			<option th:each="us: ${ListeEnfants}"
   			 th:value="${us.numero}" th:text="${us.nom}+',    '+${us.prenom} ">Valeur 1</option> 
 		</select>
+
+
+           </div>
+
+          </div>
+        </div>
+           
+        </div>
  
   <img class="card-img-top" src="..." alt="Card image cap"/>
   <input type="hidden" name="idAnnonce" th:value="${Annonce.numero_annonce}" ></input>

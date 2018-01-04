@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class ControllerEnfants implements IControllerEnfant {
+public class ControllerEnfants  {
 
 	@Autowired
 	private EnfantService enfantService;
@@ -16,7 +16,7 @@ public class ControllerEnfants implements IControllerEnfant {
 	/* (non-Javadoc)
 	 * @see org.pam.controlleur.IControllerEnfant#ajouterEnfant()
 	 */
-	@Override
+	
 	@RequestMapping("/ajouterEnfant")
 	public String  ajouterEnfant(){
 		
@@ -25,7 +25,7 @@ public class ControllerEnfants implements IControllerEnfant {
 	/* (non-Javadoc)
 	 * @see org.pam.controlleur.IControllerEnfant#AddEnfant(org.springframework.ui.Model, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
 	 */
-	@Override
+	
 	@RequestMapping("/AddEnfant")
 	public String  AddEnfant(Model model,String Nom ,String Prénom,String NiveauEtud,String Age,String Maladie,String Photo){
 		

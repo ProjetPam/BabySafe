@@ -2,13 +2,16 @@ package org.pam.model;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Annonce implements Serializable {
@@ -21,29 +24,47 @@ public class Annonce implements Serializable {
 	private Timestamp heure_fini;
 	private String description;
 	private Double prix;
+	private String statut;
+	private Timestamp date_annulation;
+	
 	
 	@ManyToOne
 	@JoinColumn(name="CODE_UTILISATEUR")
 	private Utilisateur utilisateur;
 	
+	@OneToMany(mappedBy="annonce",fetch=FetchType.LAZY)
+	private Collection<Reservation> reservations;
 	
 	
+	@OneToMany(mappedBy="annonce",fetch=FetchType.LAZY)
+	private Collection<Statistique> statistiques;
+	
+	@OneToMany(mappedBy="annonce",fetch=FetchType.LAZY)
+	private Collection<Avis> avis;
 	
 	
 	public Annonce() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
 	public Annonce(Date date_annonce, Timestamp heure_depart,
-			Timestamp heure_fini, String description,Double prix) {
+			Timestamp heure_fini, String description, Double prix,
+			String statut
+			) {
 		super();
 		this.date_annonce = date_annonce;
 		this.heure_depart = heure_depart;
 		this.heure_fini = heure_fini;
 		this.description = description;
-		this.prix=prix;
+		this.prix = prix;
+		this.statut = statut;
+		
+		
 	}
-	
+
+
 	public Double getPrix() {
 		return prix;
 	}

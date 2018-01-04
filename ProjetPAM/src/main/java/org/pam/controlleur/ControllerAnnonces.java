@@ -6,14 +6,16 @@ import java.util.Date;
 import org.pam.model.Annonce;
 import org.pam.service.AnnonceService;
 import org.pam.service.EnfantService;
+import org.pam.service.ReservationService;
 import org.pam.service.UtilisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.pam.model.Reservation;
 
 @Controller
-public class ControllerAnnonces implements IControllerAnnonce {
+public class ControllerAnnonces  {
 
 	@Autowired
     private AnnonceService annonceService;
@@ -24,10 +26,13 @@ public class ControllerAnnonces implements IControllerAnnonce {
 	@Autowired
     private UtilisateurService utilisateurService;
 	
+	@Autowired
+    private ReservationService reservationservice;
+	
 	/* (non-Javadoc)
 	 * @see org.pam.controlleur.IControllerAnnonce#ajouterAnnonce(org.springframework.ui.Model, java.util.Date, java.lang.String, java.lang.String, java.lang.String)
 	 */
-	@Override
+	
 	@RequestMapping("/ajouterAnnonce")
 	public String ajouterAnnonce(Model model,Date DateAnnonce,String heure_depart,String heure_fini,String description,Double prix){
 		
@@ -37,9 +42,9 @@ public class ControllerAnnonces implements IControllerAnnonce {
 	/* (non-Javadoc)
 	 * @see org.pam.controlleur.IControllerAnnonce#addAnnonce(org.springframework.ui.Model, java.util.Date, java.lang.String, java.lang.String, java.lang.String)
 	 */
-	@Override
+	
 	@RequestMapping("/AddAnnonce")
-	public String addAnnonce(Model model,Date DateAnnonce,String heure_depart,String heure_fini,String description,Double prix){
+	public String addAnnonce(Model model,Date DateAnnonce,String heure_depart,String heure_fini,String statut,String description,Double prix){
 		try {
 			//Date datAnn = new Date() ;
 			
@@ -53,7 +58,7 @@ public class ControllerAnnonces implements IControllerAnnonce {
 			int minuteFin1 = Integer.valueOf(heure_fini.substring(3, 5));
 			 Timestamp heuredepart =new Timestamp(0000, 00, 00, heureDep, minuteDep,00,00);
 			 Timestamp heurefin =new Timestamp(2000, 00, 00, heureDep1, minuteFin1,00,00);
-			   Annonce annonce=new Annonce(DateAnnonce, heuredepart, heurefin, description,prix);
+			   Annonce annonce=new Annonce(DateAnnonce, heuredepart, heurefin,description,prix,statut);
 			//Annonce annonce=new Annonce(datAnn, ts1, ts2, desc);
 			annonceService.ajouterAnnonce(annonce, 1);
 			
@@ -67,7 +72,7 @@ public class ControllerAnnonces implements IControllerAnnonce {
 	/* (non-Javadoc)
 	 * @see org.pam.controlleur.IControllerAnnonce#ajouterAnnonce(org.springframework.ui.Model)
 	 */
-	@Override
+	
 	@RequestMapping("/ListeAnnonces")
 	public String ajouterAnnonce(Model model) throws Exception{
 		model.addAttribute("listAnnonce",annonceService.getAllAnnonces());
@@ -79,7 +84,7 @@ public class ControllerAnnonces implements IControllerAnnonce {
 	/* (non-Javadoc)
 	 * @see org.pam.controlleur.IControllerAnnonce#Reservation(org.springframework.ui.Model, int)
 	 */
-	@Override
+	
 	@RequestMapping("/Reservation")
 	public String Reservation(Model model,int idAnnonce) throws Exception{
 		model.addAttribute("nombrePoints", utilisateurService.getUtilisateurById(1));
@@ -87,10 +92,14 @@ public class ControllerAnnonces implements IControllerAnnonce {
 		model.addAttribute("Annonce",annonceService.getAnnonceByID(idAnnonce));
 		return "Paiement";
 	}
-	@Override
-	public String paiement(Model model, int idenfant, int idAnnonce, Double prix,Integer poinUtiliser) {
-		// TODO Auto-generated method stub
-		return null;
+	
+	
+	@RequestMapping("/Paiement")
+	public String paiement(Model model,int idenfant,int idAnnonce, Double prix,Integer poinUtiliser) {
+
+		reservationservice.ajouterReservation(idAnnonce, 1, idenfant, new Date(), prix, poinUtiliser);
+		
+		return "ListeAnnonces";
 	}
 	
 	
