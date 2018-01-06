@@ -23,7 +23,7 @@ public class Utilisateur implements Serializable {
 	private String photo;
 	private String Adresse;
 	private String telephone;
-	private int nombre_points;
+	private long nombre_points;
 	
 	
 	private String Justificatif_domicile;
@@ -95,10 +95,10 @@ public class Utilisateur implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public int getNombre_points() {
+	public long getNombre_points() {
 		return nombre_points;
 	}
-	public void setNombre_points(int nombre_points) {
+	public void setNombre_points(long nombre_points) {
 		this.nombre_points = nombre_points;
 	}
 	 @OneToMany(mappedBy="utilisateur")

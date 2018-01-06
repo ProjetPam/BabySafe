@@ -44,7 +44,8 @@ public class ControllerAnnonces  {
 	 */
 	
 	@RequestMapping("/AddAnnonce")
-	public String addAnnonce(Model model,Date DateAnnonce,String heure_depart,String heure_fini,String statut,String description,Double prix){
+	public String addAnnonce(Model model,Date DateAnnonce,String heure_depart,String heure_fini,String statut,
+			String description,Double prix,int nombreEnfant,boolean annanceGratuit){
 		try {
 			//Date datAnn = new Date() ;
 			
@@ -56,10 +57,10 @@ public class ControllerAnnonces  {
 			int minuteDep = Integer.valueOf(heure_depart.substring(3, 5));
 			int heureDep1 = Integer.valueOf(heure_fini.substring(0, 2));
 			int minuteFin1 = Integer.valueOf(heure_fini.substring(3, 5));
-			 Timestamp heuredepart =new Timestamp(0000, 00, 00, heureDep, minuteDep,00,00);
-			 Timestamp heurefin =new Timestamp(2000, 00, 00, heureDep1, minuteFin1,00,00);
-			   Annonce annonce=new Annonce(DateAnnonce, heuredepart, heurefin,description,prix,statut);
-			//Annonce annonce=new Annonce(datAnn, ts1, ts2, desc);
+			 Timestamp heuredepart =new Timestamp(DateAnnonce.getYear(),DateAnnonce.getMonth(),DateAnnonce.getDay() , heureDep, minuteDep,00,00);
+			 Timestamp heurefin =new Timestamp(DateAnnonce.getYear(),DateAnnonce.getMonth(),DateAnnonce.getDay() , heureDep1, minuteFin1,00,00);
+			   Annonce annonce=new Annonce(DateAnnonce, heuredepart, heurefin,description,prix,statut,nombreEnfant,annanceGratuit);
+			
 			annonceService.ajouterAnnonce(annonce, 1);
 			
 		} catch (Exception e) {
@@ -95,9 +96,9 @@ public class ControllerAnnonces  {
 	
 	
 	@RequestMapping("/Paiement")
-	public String paiement(Model model,int idenfant,int idAnnonce, Double prix,Integer poinUtiliser) {
+	public String paiement(Model model,int idenfant,int idAnnonce, Double prix,Integer poinUtiliser,String typePaiement) {
 
-		reservationservice.ajouterReservation(idAnnonce, 1, idenfant, new Date(), prix, poinUtiliser);
+		reservationservice.PayerReservation(idAnnonce, 1, idenfant, new Date(), prix, poinUtiliser,typePaiement);
 		
 		return "ListeAnnonces";
 	}

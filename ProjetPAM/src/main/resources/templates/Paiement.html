@@ -27,12 +27,18 @@ layout:decorator="template1">
 
 <p th:each="nb: ${nombrePoints}">
     
-  Le nombre de points que vous avez : <input  name="nombre_points" th:value="${nb.nombre_points}" ></input>
+  Le nombre de points que vous avez : <input  name="poinUtiliser" th:value="${nb.nombre_points}" ></input>
     </p>
 
-
-
-
+<div class="radio">
+  <label><input type="radio" name="typePaiement" value="Agrent"/>Agrent</label>
+</div>
+<div class="radio">
+  <label><input type="radio" name="typePaiement" value="PointsArgent"/>Points et Argent</label>
+</div>
+<div class="radio disabled">
+  <label><input type="radio" name="typePaiement"  value="Points"/>Points</label>
+</div>
 
            </div>
 

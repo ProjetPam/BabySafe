@@ -23,9 +23,11 @@ public class Annonce implements Serializable {
 	private Timestamp heure_depart;
 	private Timestamp heure_fini;
 	private String description;
+	private int NombrEnfantGarde;
 	private Double prix;
 	private String statut;
 	private Timestamp date_annulation;
+	private boolean annonceGratuite;
 	
 	
 	@ManyToOne
@@ -43,6 +45,7 @@ public class Annonce implements Serializable {
 	private Collection<Avis> avis;
 	
 	
+	
 	public Annonce() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -51,7 +54,7 @@ public class Annonce implements Serializable {
 	
 	public Annonce(Date date_annonce, Timestamp heure_depart,
 			Timestamp heure_fini, String description, Double prix,
-			String statut
+			String statut,int nombrEnfantGarde,boolean annonceGratuite
 			) {
 		super();
 		this.date_annonce = date_annonce;
@@ -60,8 +63,80 @@ public class Annonce implements Serializable {
 		this.description = description;
 		this.prix = prix;
 		this.statut = statut;
+		this.NombrEnfantGarde=nombrEnfantGarde;
+		this.annonceGratuite=annonceGratuite;
 		
 		
+	}
+
+
+	public boolean isAnnonceGratuite() {
+		return annonceGratuite;
+	}
+
+
+	public void setAnnonceGratuite(boolean annonceGratuite) {
+		this.annonceGratuite = annonceGratuite;
+	}
+
+
+	public int getNombrEnfantGarde() {
+		return NombrEnfantGarde;
+	}
+
+
+	public void setNombrEnfantGarde(int nombrEnfantGarde) {
+		NombrEnfantGarde = nombrEnfantGarde;
+	}
+
+
+	public String getStatut() {
+		return statut;
+	}
+
+
+	public void setStatut(String statut) {
+		this.statut = statut;
+	}
+
+
+	public Timestamp getDate_annulation() {
+		return date_annulation;
+	}
+
+
+	public void setDate_annulation(Timestamp date_annulation) {
+		this.date_annulation = date_annulation;
+	}
+
+
+	public Collection<Reservation> getReservations() {
+		return reservations;
+	}
+
+
+	public void setReservations(Collection<Reservation> reservations) {
+		this.reservations = reservations;
+	}
+
+
+	public Collection<Statistique> getStatistiques() {
+		return statistiques;
+	}
+
+
+	public void setStatistiques(Collection<Statistique> statistiques) {
+		this.statistiques = statistiques;
+	}
+
+
+	public Collection<Avis> getAvis() {
+		return avis;
+	}
+
+
+	public void setAvis(Collection<Avis> avis) {
+		this.avis = avis;
 	}
 
 
