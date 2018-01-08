@@ -1,5 +1,7 @@
 package org.pam.service.impl;
 
+import java.sql.Timestamp;
+import java.util.Collection;
 import java.util.Date;
 
 import org.pam.model.Annonce;
@@ -13,6 +15,7 @@ import org.pam.repository.RepositoryReservation;
 import org.pam.repository.RepositoryStatistique;
 import org.pam.repository.RepositoryUtilisateurs;
 import org.pam.service.ReservationService;
+import org.pam.utilisies.Constante;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -144,16 +147,21 @@ public class ReservationServiceImpl implements ReservationService {
 						.getNombre_points() + calculeNombrePointGagner(annonce));
 	            double benefice = calculeNombrePointGagner(annonce);
 				statistique = new Statistique(annonce, new Date(), benefice);
-
+				 
+	             utilisateur.setNombre_points(utilisateur.getNombre_points()-calculeNombrePointGagner(annonce));
+				
 				reservation = new Reservation(dateReservation, utilisateur, enfant,
 						 benefice, 0, annonce);
 				break;
 			case "Points":
 				
 				utililateurAnnonceur.setNombre_points(utililateurAnnonceur
-						.getNombre_points() + calculeNombrePointGagner(annonce));
+						.getNombre_points() + (calculeNombrePointGagner(annonce)*2));
 	             benefice = calculeNombrePointGagner(annonce);
-				statistique = new Statistique(annonce, new Date(), benefice);
+	             
+	             utilisateur.setNombre_points(utilisateur.getNombre_points()-(calculeNombrePointGagner(annonce)*2));
+				
+	             statistique = new Statistique(annonce, new Date(), benefice);
 
 				reservation = new Reservation(dateReservation, utilisateur, enfant,
 						 benefice, 0, annonce);
@@ -179,7 +187,7 @@ public class ReservationServiceImpl implements ReservationService {
 		// Calculer Nombre d'heur à payer
 		long  HeurFin= annonce.getHeure_fini().getTime() ;
 		long Heurdepart	 = annonce.getHeure_depart().getTime();
-		long nombreHeure = (HeurFin - Heurdepart) /  (60 * 60 * 1000);;
+		long nombreHeure = (HeurFin - Heurdepart) /  (60 * 60 * 1000);
 
 
 		Double PrixPayer = nombreHeure * annonce.getPrix();
@@ -205,14 +213,45 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 	
 	private long calculeNombrePointGagner(Annonce annonce) {
+		long  HeurFin= annonce.getHeure_fini().getTime() ;
+		long Heurdepart	 = annonce.getHeure_depart().getTime();
+		long nombreHeure = (HeurFin - Heurdepart) /  (60 * 60 * 1000);
 
+		return nombreHeure;
+	}
+
+	@Override
+	public void annulerReservation(int idAnnonce, int idReservation,
+			int idUtilisateur) {
+		Date dateActuel=new Date();
 		
-				long NombreHeur = (annonce.getHeure_fini().getTime() - annonce
-						.getHeure_depart().getTime());
-				NombreHeur = NombreHeur / (24 * 60 * 60 * 1000);
-				
+		Annonce annonce=repositoryAnnonce.findOne(idAnnonce);
+		Utilisateur utilisateur=repositoryReservation.findOne((long)idReservation).getUtilisateur();
+		Reservation reservation=repositoryReservation.findOne((long)idReservation);
+		
+	long	diff =   dateActuel.getTime() - annonce.getDate_annonce().getTime();
+		
+		if( diff >= (24 * 60 * 60 * 1000)){
+			//annonce.setStatut(Constante.ANNULEE);
+			//annonce.setDate_annulation(new Timestamp(new Date().getTime()));
+		if(utilisateur.getSolde()>0){
+			utilisateur.setSolde(utilisateur.getSolde()+reservation.getPrix());
+			utilisateur.setNombre_points(utilisateur.getNombre_points()+reservation.getPointUtilise());
+		}else{
+			utilisateur.setSolde(reservation.getPrix());
+			utilisateur.setNombre_points(utilisateur.getNombre_points()+reservation.getPointUtilise());
+		}
+		
+		
+		repositoryReservation.delete((long)idReservation);
+		}
+		
+	}
 
-		return NombreHeur;
+	@Override
+	public Collection<Reservation> getAllReservationByUtilisateur(
+			int idUtilisateur) {
+		return repositoryReservation.getAllReservationByUtilisateur(idUtilisateur);
 	}
 
 }

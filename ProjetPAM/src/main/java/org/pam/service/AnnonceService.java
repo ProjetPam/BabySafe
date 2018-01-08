@@ -13,4 +13,7 @@ public interface AnnonceService {
 
 	public Annonce getAnnonceByID(int id) throws Exception;
 
+	public void annulerAnnonce(int id) throws Exception;
+	
+	public Collection<Annonce> getAllAnoncesByUtilisateur(int idUtilisateur);
 }

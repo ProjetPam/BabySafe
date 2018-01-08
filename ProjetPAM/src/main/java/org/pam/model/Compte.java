@@ -1,9 +1,12 @@
 package org.pam.model;
 
+import java.util.Collection;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -21,6 +24,8 @@ public class Compte {
 	private String Iban;
 	private String bic;
 	
+	@OneToMany(mappedBy="compte")
+	private Collection<Virement> virements;
 	
 	
 	public Compte(Utilisateur utilisateur, String nomAgence, String iban,

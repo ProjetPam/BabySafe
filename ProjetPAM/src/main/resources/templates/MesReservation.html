@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+xmlns:layout="www.ultraq.net.nz/thymeleaf/layout"
+layout:decorator="template1">
+<head>
+<meta charset="UTF-8"/>
+<title>Mes Reservation</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+<table class="table table-striped" style="color: black;">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="ListReservation:${ListReservation}">
+      <th scope="row">1</th>
+      <td th:text="${ListReservation.annonce.date_annonce}">Mark</td>
+      <td th:text="${ListReservation.enfant.nom}">Otto</td>
+      <td th:text="${ListReservation.dateReservation}">@mdo</td>
+    </tr>
+    
+  </tbody>
+</table>
+</div>
+</body>
+</html>

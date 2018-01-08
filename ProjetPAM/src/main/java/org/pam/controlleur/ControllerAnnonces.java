@@ -103,5 +103,26 @@ public class ControllerAnnonces  {
 		return "ListeAnnonces";
 	}
 	
+	@RequestMapping("/MesAnnonces")
+	public String ListeReservation(Model model) {
+
+		model.addAttribute("mesAnnonces", annonceService.getAllAnoncesByUtilisateur(1));
+		
+		return "MesAnnonces";
+	}
+	
+	@RequestMapping("/AnnulerAnnonce")
+	public String AnnulerAnnonce(Model model,int idAnnonce) {
+		try {
+			annonceService.annulerAnnonce(idAnnonce);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		model.addAttribute("mesAnnonces", annonceService.getAllAnoncesByUtilisateur(1));
+		
+		return "MesAnnonces";
+	}
 	
 }

@@ -9,7 +9,9 @@ import org.pam.model.Utilisateur;
 import org.pam.repository.RepositoryAvis;
 import org.pam.service.AvisService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AvisServiceImpl implements AvisService{
 
 	@Autowired
