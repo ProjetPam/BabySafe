@@ -20,7 +20,7 @@ public class ControllerEnfants  {
 	@RequestMapping("/ajouterEnfant")
 	public String  ajouterEnfant(){
 		
-		return "AjouterEnfant";
+		return "test";
 	}
 	/* (non-Javadoc)
 	 * @see org.pam.controlleur.IControllerEnfant#AddEnfant(org.springframework.ui.Model, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)

@@ -6,7 +6,7 @@ import java.util.Date;
 public class main {
 
 	public static void main(String[] args) {
-		Timestamp ts1 =new Timestamp(2017, 10, 10, 17, 17, 18, 12);
+		/*  Timestamp ts1 =new Timestamp(2017, 10, 10, 17, 17, 18, 12);
 		
 		Date ts2 = new Date();
 		
@@ -22,8 +22,10 @@ public class main {
 		  
 		  Timestamp ts3 =new  Timestamp(new Date().getTime());
 		  System.out.println(ts3);
-	
-
+		  */
+		 String role="operator est connecté avec le rôle operator";
+		 boolean exist = role.contains("simo"); //Renvoie true
+		System.out.println(exist);
 	}
 
 }

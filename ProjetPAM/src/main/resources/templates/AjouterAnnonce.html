@@ -33,7 +33,7 @@ layout:decorator="template1">
       <input  class="form-control" id="description" name="prix" placeholder="prix"/>
     </div>
     <div class="form-group col-md-6">
-      <label for="inputPassword4">Prix</label>
+      <label for="inputPassword4">Nombre enfant à garder</label>
       <input  class="form-control" id="description" name="nombreEnfant" placeholder="Nombre d'Enfant"/>
     </div>
     
@@ -47,7 +47,26 @@ layout:decorator="template1">
   			<option value="True">OUI</option> 
 		</select>
     </div>
+    
+     <div class="form-group col-md-6">
+      <label for="inputPassword4">Choisir une département</label>
+       <select name="idDepartement" >
+       <spam th:each="listeDepartement:${listeDepartement}">
+  			<option  th:value="${listeDepartement.departement_id}" th:text="${listeDepartement.departement_nom}" >Non</option>  
+		</spam>
+		</select>
+		<select name="idVille" >
+        <spam th:each="listeVille:${listeVille}">
+  			<option  th:value="${listeVille.idVille}" th:text="${listeVille.nom_commune}">Non</option> 
+		</spam>
+		</select>
+    </div>
    
+    
+    <div class="form-group col-md-6">
+      <input  class="form-control" id="complementAdresse" name="complementAdresse" placeholder="Complement Adresse"/>
+    </div>
+    
     
   </div>
   

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+xmlns:layout="www.ultraq.net.nz/thymeleaf/layout"
+layout:decorator="template1">
+<head>
+<meta charset="UTF-8"/>
+<title>Insert title here</title>
+</head>
+<body>
+<div layout:fragment="content">
+<nav class="navbar navbar-default sidebar" role="navigation">
+    <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>      
+    </div>
+    <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-home"></span></a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Usuarios <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a>
+          <ul class="dropdown-menu forAnimate" role="menu">
+            <li><a href="{{URL::to('createusuario')}}">Crear</a></li>
+            <li><a href="#">Modificar</a></li>
+            <li><a href="#">Reportar</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Informes</a></li>
+          </ul>
+        </li>          
+        <li ><a href="#">Libros<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-th-list"></span></a></li>        
+        <li ><a href="#">Tags<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-tags"></span></a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+<div class="card" style="color: black;">
+        <form enctype="multipart/form-data" action="../../actions/user_register.php" method="post">
+          
+
+                <h3>Titre de la page</h3>
+                <div class="row">
+
+                    <div class="col-md-9">
+                        <small class="post-date">Posté le : la date 
+                            <strong>title</strong></small>
+                        <br/>
+                        une descriptionnnnnn
+                        <br/>une descriptionnnnnn><br/>
+                        <p><a class="btn btn-default"
+                              href="">Afficher
+                                Plus </a></p>
+                    </div>
+                </div>
+            
+
+
+        </form>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+</body>
+</html>

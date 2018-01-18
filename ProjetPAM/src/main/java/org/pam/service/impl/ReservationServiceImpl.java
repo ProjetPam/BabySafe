@@ -146,6 +146,7 @@ public class ReservationServiceImpl implements ReservationService {
 				utililateurAnnonceur.setNombre_points(utililateurAnnonceur
 						.getNombre_points() + calculeNombrePointGagner(annonce));
 	            double benefice = calculeNombrePointGagner(annonce);
+	            //l'argent gagne
 				statistique = new Statistique(annonce, new Date(), benefice);
 				 
 	             utilisateur.setNombre_points(utilisateur.getNombre_points()-calculeNombrePointGagner(annonce));

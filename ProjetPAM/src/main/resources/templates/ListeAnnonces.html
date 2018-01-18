@@ -5,14 +5,23 @@ layout:decorator="template1">
 <head>
 <meta charset="UTF-8"/>
 <title>Insert title here</title>
+  <style type="text/css">
+
+</style>
 </head>
 <body>
 <div layout:fragment="content">
 
-<div th:each="listAnnonce:${listAnnonce}" class="card" style="color: black;border-color: black;border-style: solid double; border-width: 4px ">
+
+<div class="container">
+<div th:each="listAnnonce:${listAnnonce}" class="list-group" style="color: black;border-color: black;border-style: solid double; border-width: 4px; ">
  <form action="Reservation" method="post">
   <img class="card-img-top" src="..." alt="Card image cap"/>
   <input name="idAnnonce"   th:value="${listAnnonce.numero_annonce}"  />
+
+<div class="roundedImage">
+    <img src="http://static.debray-jerome.fr/49/images/slideshow/1.jpg" alt="1"/>
+</div>
   <div class="card-body">
     kjkklj<h5 class="card-title" th:text="${listAnnonce.date_annonce}">Date depart</h5>jjjjjj<h5 class="card-title" th:text="${listAnnonce.heure_depart}">Date depart</h5>
     <p class="card-text" th:text="${listAnnonce.description}">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
@@ -20,12 +29,14 @@ layout:decorator="template1">
      <button type="submit" class="btn btn-primary">Réservation</button>
    
   </div> 
+  
   </form>
 
 
-
+<br/><br/>
 </div>
-
+<br/>
+</div>
 </div>
 
 </body>

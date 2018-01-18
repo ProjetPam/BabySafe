@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Annonce implements Serializable {
@@ -28,6 +29,7 @@ public class Annonce implements Serializable {
 	private String statut;
 	private Timestamp date_annulation;
 	private boolean annonceGratuite;
+	private String complementAdresse;
 	
 	
 	@ManyToOne
@@ -44,8 +46,19 @@ public class Annonce implements Serializable {
 	@OneToMany(mappedBy="annonce",fetch=FetchType.LAZY)
 	private Collection<Avis> avis;
 	
+	@OneToOne
+	@JoinColumn(name="ID_departement",referencedColumnName="departement_id"
+			)
+	private Departement departement;
+
+
+	@OneToOne
+	@JoinColumn(name="ID_ville",referencedColumnName="idVille"
+			)
+	private Ville ville;
 	
 	
+
 	public Annonce() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -54,7 +67,8 @@ public class Annonce implements Serializable {
 	
 	public Annonce(Date date_annonce, Timestamp heure_depart,
 			Timestamp heure_fini, String description, Double prix,
-			String statut,int nombrEnfantGarde,boolean annonceGratuite
+			String statut,int nombrEnfantGarde,boolean annonceGratuite,
+			Departement departement,Ville ville,String complementAdresse
 			) {
 		super();
 		this.date_annonce = date_annonce;
@@ -65,8 +79,40 @@ public class Annonce implements Serializable {
 		this.statut = statut;
 		this.NombrEnfantGarde=nombrEnfantGarde;
 		this.annonceGratuite=annonceGratuite;
+		this.departement=departement;
+		this.ville=ville;
+		this.complementAdresse=complementAdresse;
 		
-		
+	}
+
+
+	public String getComplementAdresse() {
+		return complementAdresse;
+	}
+
+
+	public void setComplementAdresse(String complementAdresse) {
+		this.complementAdresse = complementAdresse;
+	}
+
+
+	public Departement getDepartement() {
+		return departement;
+	}
+
+
+	public void setDepartement(Departement departement) {
+		this.departement = departement;
+	}
+
+
+	public Ville getVille() {
+		return ville;
+	}
+
+
+	public void setVille(Ville ville) {
+		this.ville = ville;
 	}
 
 
