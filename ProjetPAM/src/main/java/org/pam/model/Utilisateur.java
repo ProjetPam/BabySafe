@@ -124,14 +124,22 @@ public class Utilisateur implements Serializable {
 	}
 	public Utilisateur() {
 		super();
-		// TODO Auto-generated constructor stub
+		
 	}
-	public Utilisateur(String nom, String prenom, String email, String password) {
+	
+	public Utilisateur(String nom, String prenom, String email,
+			String password, String photo, String adresse, String telephone,
+			String justificatif_domicile, String piece_d_identite) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
 		this.email = email;
 		this.password = password;
+		this.photo = photo;
+		this.Adresse = adresse;
+		this.telephone = telephone;
+		this.Justificatif_domicile = justificatif_domicile;
+		this.piece_d_identite = piece_d_identite;
 	}
 	public Collection<Annonce> getAnnonces() {
 		return annonce;
@@ -157,6 +165,7 @@ public class Utilisateur implements Serializable {
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
+	
 	public String getJustificatif_domicile() {
 		return Justificatif_domicile;
 	}

@@ -14,26 +14,35 @@ layout:decorator="template1">
 
 
 <div class="container">
-<div th:each="listAnnonce:${listAnnonce}" class="list-group" style="color: black;border-color: black;border-style: solid double; border-width: 4px; ">
+<div th:each="listAnnonce:${listAnnonce}" class="list-group" style="color: black;border-color: black;border-style: solid double; border-width: 1px; ">
  <form action="Reservation" method="post">
-  <img class="card-img-top" src="..." alt="Card image cap"/>
-  <input name="idAnnonce"   th:value="${listAnnonce.numero_annonce}"  />
 
-<div class="roundedImage">
-    <img src="http://static.debray-jerome.fr/49/images/slideshow/1.jpg" alt="1"/>
-</div>
-  <div class="card-body">
-    kjkklj<h5 class="card-title" th:text="${listAnnonce.date_annonce}">Date depart</h5>jjjjjj<h5 class="card-title" th:text="${listAnnonce.heure_depart}">Date depart</h5>
-    <p class="card-text" th:text="${listAnnonce.description}">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    
-     <button type="submit" class="btn btn-primary">Réservation</button>
-   
-  </div> 
+<table class="table">
+  
+    <tr>
+      <td><img src="http://static.debray-jerome.fr/49/images/slideshow/1.jpg" height="100" width="300" class="rounded mx-auto d-block" alt="..."/>
+      <h5 style="color: maroon"  th:text="${listAnnonce.utilisateur.nom+' '+listAnnonce.utilisateur.prenom}">Date depart</h5></td>
+      <td>
+      <h3 style="color: maroon" >Besancon</h3>
+      <h5 class="card-title" th:text="${'Date : '+listAnnonce.date_annonce.toGMTString().substring(0, 12)}">
+      </h5><h5 class="card-title" th:text="${'Heure Depart : '+listAnnonce.heure_depart.getHours()+':00'}">Date depart</h5> </td>
+      <td><p class="card-text" th:text="${listAnnonce.description}"/></td>
+      <td><input type="hidden" name="idAnnonce"   th:value="${listAnnonce.numero_annonce}"  />
+      <h2 style="color: green" th:text="${listAnnonce.prix+'0 €'}">Date depart</h2>
+      <h4 style="color: green">Par Heure</h4></td>
+    </tr>
+  
+   <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td><button type="submit" class="btn btn-primary">Réservation</button></td>
+    </tr>
+     
+</table>
   
   </form>
 
-
-<br/><br/>
 </div>
 <br/>
 </div>

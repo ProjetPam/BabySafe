@@ -19,4 +19,16 @@ public class UtilisateurServiceImpl implements UtilisateurService {
 		return repositoryutilisateur.findOne(idUtilisateur);
 	}
 
+
+	@Override
+	public Utilisateur authentitication(String login, String password) {
+		return repositoryutilisateur.getLoginPASS(login, password);
+	}
+
+
+	@Override
+	public void enregistrement(Utilisateur utilisateur) {
+		repositoryutilisateur.save(utilisateur);
+	}
+
 }
