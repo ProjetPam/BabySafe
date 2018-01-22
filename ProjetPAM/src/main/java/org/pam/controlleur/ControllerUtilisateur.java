@@ -17,7 +17,12 @@ public class ControllerUtilisateur {
 	
 	
 	
-
+	@RequestMapping("/authentification")
+	public String authentification(){
+		
+		return "Authentification";
+	}
+	
 	@RequestMapping("/sinscrir")
 	public String demandEnregistrer(){
 		
@@ -37,6 +42,19 @@ utilisateurservice.enregistrement(utilisateur);
 		//}
 		
 		return "EnregistrementUtilisateur";
+	}
+	
+	
+	@RequestMapping("/login")
+	public String login(Model model,String password,
+			                  String email){
+		
+       Utilisateur utilisateur =utilisateurservice.authentitication(email, password);
+	if(utilisateur != null){
+		return "ListeAnnonces";
+	}
+		
+		return "Authentification";
 	}
 	
 	
