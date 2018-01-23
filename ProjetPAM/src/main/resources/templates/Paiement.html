@@ -1,148 +1,176 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" 
-xmlns:layout="www.ultraq.net.nz/thymeleaf/layout"
-layout:decorator="template1">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="template1">
 <head>
-<meta charset="UTF-8"/>
+<meta charset="UTF-8" />
 <title>Insert title here</title>
 </head>
 <body>
-<div layout:fragment="content">
+	<div layout:fragment="content">
 
-<div th:each="Annonce:${Annonce}" class="card" style="color: black;border-color: black;border-style: solid double; border-width: 4px ">
- <form   th:action="@{/Paiement}"  method="post">
- 
-    <br/>
+		<div th:each="Annonce:${Annonce}" class="card"
+			style="color: black; border-color: black; border-style: solid double; border-width: 0px">
+			<form th:action="@{/Paiement}" method="post">
 
-		<div class="container">
+				<br />
+
+				<div class="container">
+
+					<div class="col-md-6">
+						<div class="panel panel-primary">
+							<div class="panel-heading">
+								<p th:each="nb: ${nombrePoints}">
+
+									Le nombre de points que vous avez : <input name="poinUtiliser"
+										th:value="${nb.nombre_points}"></input>
+								</p>
+							</div>
+							<div class="panel-body">
+
+
+
+								<div class="radio">
+									<label><input type="radio" name="typePaiement"
+										checked="checked" value="Agrent" />Agrent</label>
+								</div>
+								<div class="radio">
+									<label><input type="radio" name="typePaiement"
+										value="PointsArgent" />Points et Argent</label>
+								</div>
+								<div class="radio disabled">
+									<label><input type="radio" name="typePaiement"
+										value="Points" />Points</label>
+								</div>
+
+							</div>
+
+						</div>
+					</div>
+					<div class="col-md-6" >
+						<div class="panel panel-primary" style="height: 180px;">
+							<div class="panel-heading ">choisissez un enfant</div>
+							<div class="panel-body">
+
+
+
+								<div class="radio" th:each="us: ${ListeEnfants}">
+									<label><input type="radio" name="idenfant"
+										checked="checked" th:value="${us.numero}"
+										th:text="${us.nom}+',    '+${us.prenom} " />Agrent</label>
+								</div>
+								
+							</div>
+
+						</div>
+					</div>
+					
+					<div class="col-md-6">
+						<div class="panel panel-primary">
+							<div class="panel-heading">Votre Réservation</div>
+							<div class="panel-body">
+               <input type="hidden" name="idAnnonce" th:value="${Annonce.numero_annonce}"></input>
+				<div class="card-body">
+					<h4 class="card-title" th:text="${'Date d annonce : '+Annonce.date_annonce.toGMTString().substring(0, 12)}">Date
+						depart</h4>
+					
+					<h5 class="card-title" th:text="${'Heure départ '+Annonce.heure_depart.getHours()+':00 | heure fin  '+Annonce.heure_fini.getHours()+':00'}">Date
+						depart</h5>
+						<h5 class="card-title" >Ville : Besancon</h5>
+					<p class="card-text" th:text="${Annonce.description}"></p>
+						<h3 class="card-title"  th:text="${Annonce.Prix} +'0€ /heure'">prix</h3>
+					</div>
+
+						</div>
+					</div>
+
+				</div>
+
+				
+             <div class="col-md-6">
+						<div class="panel panel-primary">
+							<div class="panel-heading">Paiement</div>
+							<div class="panel-body">
     
-        <div class="col-md-6">
-          <div class="panel panel-primary">
-            <div class="panel-heading"><p th:each="nb: ${nombrePoints}">
-    
-  Le nombre de points que vous avez : <input  name="poinUtiliser" th:value="${nb.nombre_points}" ></input>
-    </p></div>
-           <div class="panel-body">
-
-
-
-<div class="radio">
-  <label><input type="radio" name="typePaiement" checked="checked" value="Agrent"/>Agrent</label>
-</div>
-<div class="radio">
-  <label><input type="radio" name="typePaiement" value="PointsArgent"/>Points et Argent</label>
-</div>
-<div class="radio disabled">
-  <label><input type="radio" name="typePaiement"  value="Points"/>Points</label>
-</div>
-
-           </div>
-
-          </div>
-        </div>
-           <div class="col-md-6">
-          <div class="panel panel-primary">
-            <div class="panel-heading">choisissez un enfant</div>
-           <div class="panel-body">
-
-              
-
-     <div class="radio" th:each="us: ${ListeEnfants}">
-  <label><input type="radio" name="idenfant" checked="checked"    th:value="${us.numero}" th:text="${us.nom}+',    '+${us.prenom} "/>Agrent</label>
-</div>
-
-
-           </div>
-
-          </div>
-        </div>
-           
-        </div>
- 
-  <img class="card-img-top" src="..." alt="Card image cap"/>
-  <input type="hidden" name="idAnnonce" th:value="${Annonce.numero_annonce}" ></input>
-  <div class="card-body">
-    kjkklj<h5 class="card-title" th:text="${Annonce.date_annonce}">Date depart</h5>jjjjjj<h5 class="card-title" th:text="${Annonce.heure_depart}">Date depart</h5>
-    <p class="card-text" th:text="${Annonce.description}">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <br/>
-    <input class="card-text" name="prix" th:text="${Annonce.Prix} +' €'">Some quick e</input>
-    
-    
-    <br/>
-    
-    <div class="container">
-  
-    <fieldset>
-      <legend>Payment</legend>
-      <div class="form-group">
-        <label class="col-sm-3 control-label" for="card-holder-name">Name on Card</label>
-        <div class="col-sm-9">
-          <input type="text" class="form-control" name="nom" id="card-holder-name" placeholder="Card Holder's Name"/>
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="col-sm-3 control-label" for="card-number">Card Number</label>
-        <div class="col-sm-9">
-          <input type="text" class="form-control" name="numero_carte" id="card-number" placeholder="Entrer Card Number"/>
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="col-sm-3 control-label" for="date-experation">Expiration Date</label>
-        <div class="col-sm-9">
-          <div class="row">
-            <div class="col-xs-3">
-              <select class="form-control col-sm-2" name="mois-expiry" id="expiry-month">
-                <option>Month</option>
-                <option value="01">Jan (01)</option>
-                <option value="02">Feb (02)</option>
-                <option value="03">Mar (03)</option>
-                <option value="04">Apr (04)</option>
-                <option value="05">May (05)</option>
-                <option value="06">June (06)</option>
-                <option value="07">July (07)</option>
-                <option value="08">Aug (08)</option>
-                <option value="09">Sep (09)</option>
-                <option value="10">Oct (10)</option>
-                <option value="11">Nov (11)</option>
-                <option value="12">Dec (12)</option>
-              </select>
+				<div class="card-body">
+				
+                       <div class="form-group">
+                <label>Nom  </label>
+                <input type="text" name="lastname" class="form-control" placeholder="Entrez votre Nom"/>
             </div>
-            <div class="col-xs-3">
-              <select class="form-control" name="annee-expiration">
-                <option value="13">2013</option>
-                <option value="14">2014</option>
-                <option value="15">2015</option>
-                <option value="16">2016</option>
-                <option value="17">2017</option>
-                <option value="18">2018</option>
-                <option value="19">2019</option>
-                <option value="20">2020</option>
-                <option value="21">2021</option>
-                <option value="22">2022</option>
-                <option value="23">2023</option>
-              </select>
+            <div class="form-group">
+                <label>Numero de carte</label>
+                <input type="text" name="lastname" class="form-control" placeholder="Entrez le umero de carte"/>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="col-sm-3 control-label" for="cvv">Card CVV</label>
-        <div class="col-sm-3">
-          <input type="text" class="form-control" name="cvv" id="cvv" placeholder="Security Code"/>
-        </div>
-      </div>
-     
-    </fieldset>
-  
-</div>
-    
-     <button type="submit" class="btn btn-primary">Vous pouvez payer maintenant</button>
-    
-  </div>
-  
-  
-  
-  </form>
-</div></div>
+							<div class="form-group">
+								<label class="col-sm-3 control-label" for="date-experation">Expiration
+									Date</label>
+								<div >
+									<div class="row">
+										<div class="col-xs-3">
+											<select class="form-control col-sm-2" name="mois-expiry"
+												id="expiry-month">
+												<option>Month</option>
+												<option value="01">Jan (01)</option>
+												<option value="02">Feb (02)</option>
+												<option value="03">Mar (03)</option>
+												<option value="04">Apr (04)</option>
+												<option value="05">May (05)</option>
+												<option value="06">June (06)</option>
+												<option value="07">July (07)</option>
+												<option value="08">Aug (08)</option>
+												<option value="09">Sep (09)</option>
+												<option value="10">Oct (10)</option>
+												<option value="11">Nov (11)</option>
+												<option value="12">Dec (12)</option>
+											</select>
+										</div>
+										<div class="col-xs-3">
+											<select class="form-control" name="annee-expiration">
+												<option value="13">2013</option>
+												<option value="14">2014</option>
+												<option value="15">2015</option>
+												<option value="16">2016</option>
+												<option value="17">2017</option>
+												<option value="18">2018</option>
+												<option value="19">2019</option>
+												<option value="20">2020</option>
+												<option value="21">2021</option>
+												<option value="22">2022</option>
+												<option value="23">2023</option>
+											</select>
+											</div>
+											
+										</div>
+
+<button type="submit" class="btn btn-primary">Vous pouvez
+						payer maintenant</button>
+
+                                </div>
+                            </div> <br/>
+
+
+                           
+
+
+
+
+					</div>
+
+						</div>
+					</div>
+
+				</div>
+					
+
+					
+
+				</div>
+
+
+
+			</form>
+		</div>
+	</div>
 </body>
 </html>

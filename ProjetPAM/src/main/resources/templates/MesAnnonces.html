@@ -8,28 +8,30 @@ layout:decorator="template1">
 </head>
 <body>
 <div layout:fragment="content">
-
+<div class="container">
 <table class="table table-striped" style="color: black;">
   <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+    <tr style="font-size:15px;"  class="bg-primary">
+      <td scope="col">Date d'annonce</td>
+      <td scope="col">Déscription</td>
+      <td scope="col">Prix</td>
+      <td scope="col"></td>
     </tr>
   </thead>
   <tbody>
     <tr th:each="mesAnnonces:${mesAnnonces}">
-      <th scope="row">1</th>
-      <td th:text="${mesAnnonces.date_annonce}">Mark</td>
+     <td th:text="${mesAnnonces.date_annonce.toGMTString().substring(0, 12)}">Mark</td>
       <td th:text="${mesAnnonces.description}">Otto</td>
       <td th:text="${mesAnnonces.prix}">@mdo</td>
-      <td >
-      <a th:href="@{/AnnulerAnnonce}+'?idAnnonce='+${mesAnnonces.numero_annonce}">Annuler Annonce</a></td>
+      <td style="right: 0px;">
+      <a class="btn btn-success" th:href="@{/AnnulerAnnonce}+'?idAnnonce='+${mesAnnonces.numero_annonce}">Modifier</a>
+     <a class="btn btn-danger" th:href="@{/AnnulerAnnonce}+'?idAnnonce='+${mesAnnonces.numero_annonce}">Annuler</a></td>
+   
     </tr>
     
   </tbody>
 </table>
+</div>
 </div>
 </body>
 </html>

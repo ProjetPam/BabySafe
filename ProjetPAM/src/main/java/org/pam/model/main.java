@@ -3,6 +3,10 @@ package org.pam.model;
 import java.sql.Timestamp;
 import java.util.Date;
 
+import javax.servlet.http.HttpSession;
+
+import org.apache.catalina.connector.Request;
+
 public class main {
 
 	public static void main(String[] args) {
@@ -27,5 +31,6 @@ public class main {
 		 boolean exist = role.contains("simo");*/ //Renvoie true
 		//System.out.println(exist);
 	}
-
+	
+	
 }

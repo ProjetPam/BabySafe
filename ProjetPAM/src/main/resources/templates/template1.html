@@ -54,14 +54,17 @@ xmlns:layout="www.ultraq.net.nz/thymeleaf/layout">
 						</ul>
 					</li>
 					<li><a href="contact.html">Contact</a></li>
-					<li><a class="btn" href="signin.html">SIGN IN / SIGN UP</a></li>
+					
+					<li><a class="btn" th:if="${session.nom==null}" th:href="@{/login}">SE CONNECTER</a></li>
+					<li><a style="color:red"  th:if="${session.nom}" th:text="${'Connetcé : '+session.nom}" th:unless="${session == null}">SIGN IN / SIGN UP</a></li>
+				    <li><a class="btn" th:if="${session.nom}" th:href="@{/logout}">SE DECONNECTER</a></li>
 				</ul>
 			</div><!--/.nav-collapse -->
 		</div>
 	</div> 
 	</header>
 	
-	<div id="head" style="background:white;">
+	<div id="head" style="background:white;margin-top: -66px;" >
 		<section layout:fragment="content"></section>
 	</div>
 

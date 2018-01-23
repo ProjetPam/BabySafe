@@ -1,5 +1,7 @@
 package org.pam.controlleur;
 
+import javax.servlet.http.HttpSession;
+
 import org.pam.model.Utilisateur;
 import org.pam.service.UtilisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,13 +49,26 @@ utilisateurservice.enregistrement(utilisateur);
 	
 	@RequestMapping("/login")
 	public String login(Model model,String password,
-			                  String email){
+			                  String email,HttpSession session){
 		
        Utilisateur utilisateur =utilisateurservice.authentitication(email, password);
 	if(utilisateur != null){
+		
+		session.setAttribute("nom",utilisateur.getNom());
+		session.setAttribute("prenom", utilisateur.getPrenom());
+		session.setAttribute("idUtilisateur",utilisateur.getNumero());
 		return "ListeAnnonces";
 	}
 		
+		return "Authentification";
+	}
+	
+	
+	@RequestMapping("/logout")
+	public String logout(Model model,String password,
+			                  String email,HttpSession session){
+		
+      session.invalidate();
 		return "Authentification";
 	}
 	

@@ -3,6 +3,8 @@ package org.pam.controlleur;
 import java.sql.Timestamp;
 import java.util.Date;
 
+import javax.servlet.http.HttpSession;
+
 import org.pam.model.Annonce;
 import org.pam.model.Departement;
 import org.pam.repository.RepositoryDepartement;
@@ -92,41 +94,25 @@ public class ControllerAnnonces  {
 	 * @see org.pam.controlleur.IControllerAnnonce#Reservation(org.springframework.ui.Model, int)
 	 */
 	
-	@RequestMapping("/Reservation")
-	public String Reservation(Model model,int idAnnonce) throws Exception{
-		model.addAttribute("nombrePoints", utilisateurService.getUtilisateurById(1));
-		model.addAttribute("ListeEnfants",enfantService.getEnfantsByUtilisateur(1));
-		model.addAttribute("Annonce",annonceService.getAnnonceByID(idAnnonce));
-		return "Paiement";
-	}
-	
-	
-	@RequestMapping("/Paiement")
-	public String paiement(Model model,int idenfant,int idAnnonce, Double prix,Integer poinUtiliser,String typePaiement) {
-
-		reservationservice.PayerReservation(idAnnonce, 1, idenfant, new Date(), prix, poinUtiliser,typePaiement);
-		
-		return "ListeAnnonces";
-	}
 	
 	@RequestMapping("/MesAnnonces")
-	public String ListeReservation(Model model) {
-
-		model.addAttribute("mesAnnonces", annonceService.getAllAnoncesByUtilisateur(1));
+	public String ListeReservation(Model model,HttpSession session) {
+		int idUtilisateur=Integer.parseInt(session.getAttribute("idUtilisateur").toString());
+		model.addAttribute("mesAnnonces", annonceService.getAllAnoncesByUtilisateur(idUtilisateur));
 		
 		return "MesAnnonces";
 	}
 	
 	@RequestMapping("/AnnulerAnnonce")
-	public String AnnulerAnnonce(Model model,int idAnnonce) {
+	public String AnnulerAnnonce(Model model,int idAnnonce,HttpSession session) {
 		try {
 			annonceService.annulerAnnonce(idAnnonce);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		model.addAttribute("mesAnnonces", annonceService.getAllAnoncesByUtilisateur(1));
+		int idUtilisateur=Integer.parseInt(session.getAttribute("idUtilisateur").toString());
+		model.addAttribute("mesAnnonces", annonceService.getAllAnoncesByUtilisateur(idUtilisateur));
 		
 		return "MesAnnonces";
 	}
