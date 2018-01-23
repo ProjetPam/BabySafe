@@ -1,10 +1,79 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+
+<html xmlns:th="http://www.thymeleaf.org" 
+xmlns:layout="www.ultraq.net.nz/thymeleaf/layout"
+layout:decorator="template1">
 <head>
-	<meta charset="utf-8"/>
-	
-	
+<meta charset="UTF-8"/>
 	<title>WITH MY KIDS</title>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
+<link rel="stylesheet" href="img/main.css"/>
+
+<!-- <script type="text/javascript"  src="img/prototype-1.js"></script> -->
+<!-- 			<script type="text/javascript"  src="img/prototype-base-extensions.js"></script> -->
+<!-- 			<script type="text/javascript" src="img/prototype-date-extensions.js"></script> -->
+<!-- 			<script type="text/javascript"  src="img/behaviour.js"></script> -->
+<!-- 							<script type="text/javascript"  src="img/datepicker.js"></script> -->
+<!-- 										<link rel="stylesheet" href="img/datepicker.css"> -->
+<!-- 							<script type="text/javascript"  src="img/behaviors.js"></script> -->
+
+			<script type="text/javascript">
+				   var bindDatePicker = function() {
+					   console.log("ok");
+						$(".date").datetimepicker({
+				        format:'YYYY-MM-DD',
+							icons: {
+								time: "fa fa-clock-o",
+								date: "fa fa-calendar",
+								up: "fa fa-arrow-up",
+								down: "fa fa-arrow-down"
+							}
+						}).find('input:first').on("blur",function () {
+							// check if the date is correct. We can accept dd-mm-yyyy and yyyy-mm-dd.
+							// update the format if it's yyyy-mm-dd
+							var date = parseDate($(this).val());
+
+							if (! isValidDate(date)) {
+								//create date based on momentjs (we have that)
+								date = moment().format('YYYY-MM-DD');
+							}
+
+							$(this).val(date);
+						});
+					}
+				   
+				   var isValidDate = function(value, format) {
+						format = format || false;
+						// lets parse the date to the best of our knowledge
+						if (format) {
+							value = parseDate(value);
+						}
+
+						var timestamp = Date.parse(value);
+
+						return isNaN(timestamp) == false;
+				   }
+				   
+				   var parseDate = function(value) {
+						var m = value.match(/^(\d{1,2})(\/|-)?(\d{1,2})(\/|-)?(\d{4})$/);
+						if (m)
+							value = m[5] + '-' + ("00" + m[3]).slice(-2) + '-' + ("00" + m[1]).slice(-2);
+
+						return value;
+				   }
+				   
+				   bindDatePicker();
+			
+			
+			</script>
+			<script  type="text/javascript"  src="img/prototype-base-extensions.js"></script>
+			<script  type="text/javascript"  src="img/prototype-date-extensions.js"></script>
+			<script  type="text/javascript"  src="img/behaviour.js"></script>
+							<script  type="text/javascript"  src="img/datepicker.js"></script>
+										<link rel="stylesheet" href="img/datepicker.css"/>
+							<script  type="text/javascript"  src="img/behaviors.js"></script>
+			
+
 
 	<link rel="shortcut icon" href="assets/images/gt_favicon.png">
 	
@@ -25,6 +94,8 @@
 	<script src="assets/js/html5shiv.js" th:href="@{assets/js/html5shiv.js}"></script>
 	<script src="assets/js/respond.min.js" th:href="@{assets/js/respond.min.js}"></script>
 	<![endif]-->
+	
+	
 </head>
 
 <body class="home">
@@ -62,7 +133,23 @@
 			<div class="row">
 				<h1 class="lead">AWESOME, CUSTOMIZABLE, FREE</h1>
 				<p class="tagline">PROGRESSUS: free business bootstrap template by <a href="http://www.gettemplate.com/?utm_source=progressus&amp;utm_medium=template&amp;utm_campaign=progressus">GetTemplate</a></p>
-				<p><a class="btn btn-default btn-lg" role="button">MORE INFO</a> <a class="btn btn-action btn-lg" role="button">DOWNLOAD NOW</a></p>
+				<p><input type="text" class="btn btn-default btn-lg" placeholder="Entrez la ville" ></input> <input type="text" class="btn btn-default btn-lg" placeholder="Choisir une date" ></input> <a class="btn btn-action btn-lg" role="button">Recherche</a></p>
+			
+		<div class="container">
+  <div class="row">
+    Date formats: yyyy-mm-dd, yyyymmdd, dd-mm-yyyy, dd/mm/yyyy, ddmmyyyyy
+  </div>
+  <br />
+    <div class="row">
+        <div class="input-append date" id="dp3" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+  <input class="span2" size="16" type="text" value="12-02-2012">
+  <span class="add-on"><i class="icon-th"></i></span>
+</div>
+    </div>
+</div>
+		
+		
+		
 			</div>
 		</div>
 	</header>
