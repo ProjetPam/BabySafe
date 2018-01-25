@@ -19,4 +19,6 @@ public interface AnnonceService {
 	public void annulerAnnonce(int id) throws Exception;
 	
 	public Collection<Annonce> getAllAnoncesByUtilisateur(int idUtilisateur);
+	
+	public Collection<Annonce> getAllAnnceByDate(String ville,Date date);
 }

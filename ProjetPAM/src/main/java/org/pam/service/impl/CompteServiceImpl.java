@@ -44,6 +44,10 @@ public class CompteServiceImpl implements CompteService {
 				repositoryVirement.save(new Virement(new Date(), utilisateur.getSolde(), compte));
 				utilisateur.setSolde(0.0);
 				
+			}else{
+				Compte compte=repositoryCompte.getCompteUtilisateur(utilisateur);
+				repositoryVirement.save(new Virement(new Date(), utilisateur.getSolde(), compte));
+				utilisateur.setSolde(0.0);
 			}
 		}
 			

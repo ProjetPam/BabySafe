@@ -16,4 +16,8 @@ public interface ReservationService {
 	        public void annulerReservation(int idAnnonce,int idReservation,int idUtilisateur);
 	        public Collection<Reservation> getAllReservationByUtilisateur(int idUtilisateur);
 	
+	        public Collection<Reservation> getHistoriqueReservationByUtilisateur(int idUtilisateur);
+	        
+	        public Double getArgentVerser(int idUtilisateur);
+	        
 }

@@ -1,21 +1,25 @@
 package org.pam.service.impl;
 
+
 import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
 
 import org.pam.model.Annonce;
+import org.pam.model.Compte;
 import org.pam.model.Enfant;
 import org.pam.model.Reservation;
 import org.pam.model.Statistique;
 import org.pam.model.Utilisateur;
+import org.pam.model.Virement;
 import org.pam.repository.RepositoryAnnonce;
+import org.pam.repository.RepositoryCompte;
 import org.pam.repository.RepositoryEnfants;
 import org.pam.repository.RepositoryReservation;
 import org.pam.repository.RepositoryStatistique;
 import org.pam.repository.RepositoryUtilisateurs;
+import org.pam.repository.RepositoryVirement;
 import org.pam.service.ReservationService;
-import org.pam.utilisies.Constante;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +40,13 @@ public class ReservationServiceImpl implements ReservationService {
 
 	@Autowired
 	private RepositoryStatistique repositoryStatistique;
+	
+	@Autowired
+	private RepositoryCompte repositoryCompte;
+	
+	@Autowired
+	private RepositoryVirement repositoryVirement;
+	
 
 	private final static int POURCENTAGE = 30;
 
@@ -132,7 +143,7 @@ public class ReservationServiceImpl implements ReservationService {
 					reservation = new Reservation(dateReservation, utilisateur,
 							enfant, ConvertirPointsVertEuro(pointUtilise),
 							pointUtilise, annonce);
-
+					
 				}
 
 				break;
@@ -172,7 +183,7 @@ public class ReservationServiceImpl implements ReservationService {
 			
 
 		}
-
+		reservation.setStatut("encours");
 		repositoryReservation.save(reservation);
 
 		repositoryStatistique.save(statistique);
@@ -226,16 +237,17 @@ public class ReservationServiceImpl implements ReservationService {
 			int idUtilisateur) {
 		Date dateActuel=new Date();
 		
-		Annonce annonce=repositoryAnnonce.findOne(idAnnonce);
-		Utilisateur utilisateur=repositoryReservation.findOne((long)idReservation).getUtilisateur();
+		//Annonce annonce=repositoryAnnonce.findOne(idAnnonce);
+		Annonce annonce=repositoryReservation.findOne((long)idReservation).getAnnonce();
+		Utilisateur utilisateur=repositoryReservation.findOne((long)idReservation).getAnnonce().getUtilisateur();
 		Reservation reservation=repositoryReservation.findOne((long)idReservation);
 		
-	long	diff =   dateActuel.getTime() - annonce.getDate_annonce().getTime();
+	long	diff =   annonce.getDate_annonce().getTime() - dateActuel.getTime();
 		
 		if( diff >= (24 * 60 * 60 * 1000)){
 			//annonce.setStatut(Constante.ANNULEE);
 			//annonce.setDate_annulation(new Timestamp(new Date().getTime()));
-		if(utilisateur.getSolde()>0){
+		if(utilisateur.getSolde()>0 && utilisateur.getNombre_points() >0){
 			utilisateur.setSolde(utilisateur.getSolde()+reservation.getPrix());
 			utilisateur.setNombre_points(utilisateur.getNombre_points()+reservation.getPointUtilise());
 		}else{
@@ -243,16 +255,49 @@ public class ReservationServiceImpl implements ReservationService {
 			utilisateur.setNombre_points(utilisateur.getNombre_points()+reservation.getPointUtilise());
 		}
 		
-		
-		repositoryReservation.delete((long)idReservation);
+		reservation.setStatut("annulee");
+		repositoryReservation.save(reservation);
 		}
 		
 	}
 
 	@Override
-	public Collection<Reservation> getAllReservationByUtilisateur(
-			int idUtilisateur) {
+	public Collection<Reservation> getAllReservationByUtilisateur(int idUtilisateur) {
 		return repositoryReservation.getAllReservationByUtilisateur(idUtilisateur);
+	}
+
+	@Override
+	public Collection<Reservation> getHistoriqueReservationByUtilisateur(
+			int idUtilisateur) {
+		return repositoryReservation.getHistoriqueReservationByUtilisateur(idUtilisateur);
+	}
+
+	@Override
+	public Double getArgentVerser(int idUtilisateur) {
+		Collection<Reservation> allreservation=getHistoriqueReservationByUtilisateur(idUtilisateur);
+		
+		Date date= new java.util.Date();
+		Timestamp dateActuel = new Timestamp(date.getTime());
+		
+		Double Somme=0.0;
+		for (Reservation reservation : allreservation) {
+			//long	diff =   annonce.getDate_annonce().getTime() - dateActuel.getTime();
+			
+			if (reservation.getAnnonce().getDate_annonce().before(dateActuel) && !reservation.getStatut().equals("confirmee") ){
+				
+				Compte compte=repositoryCompte.getCompteUtilisateur(reservation.getAnnonce().getUtilisateur());
+				repositoryVirement.save(new Virement(new Date(), reservation.getPrix(), compte));
+				reservation.getAnnonce().getUtilisateur().setSolde
+				(reservation.getAnnonce().getUtilisateur().getSolde()-reservation.getPrix());
+				
+				
+				Somme=Somme+reservation.getPrix();
+				reservation.setStatut("confirmee");
+			}
+			
+			
+		}
+		return Somme;
 	}
 
 }

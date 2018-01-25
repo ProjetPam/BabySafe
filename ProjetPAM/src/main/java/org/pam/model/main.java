@@ -10,10 +10,11 @@ import org.apache.catalina.connector.Request;
 public class main {
 
 	public static void main(String[] args) {
-	  Timestamp ts1 =new Timestamp(2017, 10, 10, 17, 17, 18, 12);
+	  Date ts1 =new Date();
 		
-		Date ts2 = new Date();
-		ts2.getMinutes();
+	  Timestamp ts2 =new Timestamp(2018,01, 23, 17, 17, 18, 12);
+		
+		//ts2.getMinutes();
 /*
 		  long milliseconds1 = ts1.getTime();
 		  long milliseconds2 = ts2.getTime();
@@ -28,8 +29,10 @@ public class main {
 		  System.out.println(ts3);
 		  
 		 String role="operator est connecté avec le rôle operator";
-		 boolean exist = role.contains("simo");*/ //Renvoie true
-		//System.out.println(exist);
+		 boolean exist = role.contains("simo");*/ //Renvoie true*/
+		long diff =  ts1.getTime() - ts2.getTime() ;
+		
+             System.out.println(ts1.before(ts2));
 	}
 	
 	

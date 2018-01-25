@@ -9,6 +9,7 @@ layout:decorator="template1">
 <body>
 <div layout:fragment="content">
 <div class="container">
+<h2 style="color: black;">Le montant Verser sur Votre compte est : <p  type="text"  th:text="${SommeVerser+'0 €'}"> SommeVerser</p></h2> 
 <table class="table table-striped" style="color: black;">
   <thead>
     <tr class="bg-primary">
@@ -16,7 +17,7 @@ layout:decorator="template1">
       <td scope="col">Prenom de votre enfant</td>
       <td scope="col">Date Annonce</td>
       <td scope="col">Prix</td>
-      <td scope="col"></td>
+      <td scope="col">Statut</td>
     </tr>
   </thead>
   <tbody>
@@ -24,10 +25,8 @@ layout:decorator="template1">
       <td th:text="${ListReservation.dateReservation}">@mdo</td>
       <td th:text="${ListReservation.enfant.prenom}">Otto</td>
       <td th:text="${ListReservation.annonce.date_annonce.toGMTString().substring(0, 12)}">Mark</td>
-      <td th:text="${ListReservation.annonce.prix}">Mark</td>
-      <td>
-      <a class="btn btn-success" th:href="@{/AnnulerAnnonce}+'?idReservation='+${ListReservation.idReservation}" >Modifier</a>
-     <a class="btn btn-danger" th:href="@{/annulerReservation}+'?idReservation='+${ListReservation.idReservation}" >Annuler</a></td>
+      <td th:text="${ListReservation.prix}">Mark</td>
+      <td th:text="${ListReservation.Statut}"></td>
       
     </tr>
     

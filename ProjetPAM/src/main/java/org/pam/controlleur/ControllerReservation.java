@@ -32,22 +32,35 @@ public class ControllerReservation {
     private ReservationService reservationservice;
 	
 	@RequestMapping("/ListReservations")
-	public String ListeReservation(Model model) {
+	public String ListeReservation(Model model,HttpSession session) {
 
-		
-		model.addAttribute("ListReservation", reservationService.getAllReservationByUtilisateur(1));
+		int idUtilisateur=Integer.parseInt(session.getAttribute("idUtilisateur").toString());
+		model.addAttribute("ListReservation", reservationService.getAllReservationByUtilisateur(idUtilisateur));
 		
 		return "MesReservation";
 	}
 	
+	
+	
+	
 	@RequestMapping("/Reservation")
-	public String Reservation(Model model,int idAnnonce) throws Exception{
-		model.addAttribute("nombrePoints", utilisateurService.getUtilisateurById(1));
-		model.addAttribute("ListeEnfants",enfantService.getEnfantsByUtilisateur(1));
+	public String Reservation(Model model,int idAnnonce,HttpSession session) throws Exception{
+		int idUtilisateur=Integer.parseInt(session.getAttribute("idUtilisateur").toString());
+		model.addAttribute("nombrePoints", utilisateurService.getUtilisateurById(idUtilisateur));
+		model.addAttribute("ListeEnfants",enfantService.getEnfantsByUtilisateur(idUtilisateur));
 		model.addAttribute("Annonce",annonceService.getAnnonceByID(idAnnonce));
 		return "Paiement";
 	}
 	
+	
+	@RequestMapping("/annulerReservation")
+	public String annulerReservation(Model model,int idReservation,HttpSession session) throws Exception{
+		
+		int idUtilisateur=Integer.parseInt(session.getAttribute("idUtilisateur").toString());
+		
+		reservationservice.annulerReservation(1, idReservation, idUtilisateur);
+		return "MesReservation";
+	}
 	
 	@RequestMapping("/Paiement")
 	public String paiement(Model model,int idenfant,int idAnnonce, Double prix,
@@ -59,7 +72,14 @@ public class ControllerReservation {
 		return "ListeAnnonces";
 	}
 	
-	
+	@RequestMapping("/HistoriqueReservations")
+	public String HistoriqueReservations(Model model,HttpSession session) {
+
+		int idUtilisateur=Integer.parseInt(session.getAttribute("idUtilisateur").toString());
+		model.addAttribute("ListReservation", reservationService.getHistoriqueReservationByUtilisateur(idUtilisateur));
+		model.addAttribute("SommeVerser",reservationService.getArgentVerser(idUtilisateur));
+		return "Argents";
+	}
 	
 	
 }

@@ -111,4 +111,10 @@ public class AnnonceServiceImpl implements AnnonceService  {
 		return repositoryannonce.getAllAnoncesByUtilisateur(idUtilisateur);
 	}
 
+	@Override
+	public Collection<Annonce> getAllAnnceByDate(String ville, Date date) {
+		
+		return repositoryannonce.rechercherAnnanceParDate(ville, date);
+	}
+
 }

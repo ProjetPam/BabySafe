@@ -39,7 +39,7 @@ public class Reservation {
 	}
 	private Double prix ;
 	private Integer pointUtilise ;
-	
+	private String  statut;
 	public Reservation() {
 		super();
 	}
@@ -90,6 +90,14 @@ public class Reservation {
 	}
 	public void setPointUtilise(Integer pointUtilise) {
 		this.pointUtilise = pointUtilise;
+	}
+
+	public String getStatut() {
+		return statut;
+	}
+
+	public void setStatut(String statut) {
+		this.statut = statut;
 	}
 	
 	

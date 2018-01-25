@@ -131,25 +131,12 @@ layout:decorator="template1">
 	<header id="head">
 		<div class="container">
 			<div class="row">
+			<form action="RechercheAnnonce" method="post">
 				<h1 class="lead">AWESOME, CUSTOMIZABLE, FREE</h1>
 				<p class="tagline">PROGRESSUS: free business bootstrap template by <a href="http://www.gettemplate.com/?utm_source=progressus&amp;utm_medium=template&amp;utm_campaign=progressus">GetTemplate</a></p>
-				<p><input type="text" class="btn btn-default btn-lg" placeholder="Entrez la ville" ></input> <input type="text" class="btn btn-default btn-lg" placeholder="Choisir une date" ></input> <a class="btn btn-action btn-lg" role="button">Recherche</a></p>
-			
-		<div class="container">
-  <div class="row">
-    Date formats: yyyy-mm-dd, yyyymmdd, dd-mm-yyyy, dd/mm/yyyy, ddmmyyyyy
-  </div>
-  <br />
-    <div class="row">
-        <div class="input-append date" id="dp3" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
-  <input class="span2" size="16" type="text" value="12-02-2012">
-  <span class="add-on"><i class="icon-th"></i></span>
-</div>
-    </div>
-</div>
-		
-		
-		
+				<p><input type="text" name="ville" class="btn btn-default btn-lg" placeholder="Entrez la ville" ></input> <input type="text" name="dateR" class="btn btn-default btn-lg" placeholder="date AAAA/MM/DD" ></input>
+				 <button type="submit" class="btn btn-action btn-lg" role="button">Recherche</button></p>
+			</form>
 			</div>
 		</div>
 	</header>
