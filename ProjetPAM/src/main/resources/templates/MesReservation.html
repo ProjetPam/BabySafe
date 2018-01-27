@@ -26,7 +26,6 @@ layout:decorator="template1">
       <td th:text="${ListReservation.annonce.date_annonce.toGMTString().substring(0, 11)}">Mark</td>
       <td th:text="${ListReservation.annonce.prix}">Mark</td>
       <td>
-      <a class="btn btn-success" th:href="@{/AnnulerAnnonce}+'?idReservation='+${ListReservation.idReservation}" >Modifier</a>
      <a class="btn btn-danger" th:href="@{/annulerReservation}+'?idReservation='+${ListReservation.idReservation}" >Annuler</a></td>
       
     </tr>

@@ -44,19 +44,9 @@ xmlns:layout="www.ultraq.net.nz/thymeleaf/layout">
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav pull-right">
-					<li class="active"><a href="#">Home</a></li>
-					<li><a th:href="@{/ajouterEnfant}">ajouterEnfant</a></li>
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">More Pages <b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li><a href="sidebar-left.html">Left Sidebar</a></li>
-							<li class="active"><a href="sidebar-right.html">Right Sidebar</a></li>
-						</ul>
-					</li>
-					<li><a href="contact.html">Contact</a></li>
-					
+					<li><a th:if="${session.nom}" th:href="@{/ajouterAnnonce}">Proposer une Annoce</a></li>
 					<li><a class="btn" th:if="${session.nom==null}" th:href="@{/login}">SE CONNECTER</a></li>
-					<li><a style="color:red"  th:if="${session.nom}" th:text="${'Connetcé : '+session.nom}" th:unless="${session == null}">SIGN IN / SIGN UP</a></li>
+					<li><a style="color:red"  th:if="${session.nom}" th:text="${'Connetcé en tant que : '+session.nom}" th:unless="${session == null}">SIGN IN / SIGN UP</a></li>
 				    <li><a class="btn" th:if="${session.nom}" th:href="@{/logout}">SE DECONNECTER</a></li>
 				</ul>
 			</div><!--/.nav-collapse -->

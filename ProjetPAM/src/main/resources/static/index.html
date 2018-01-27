@@ -1,7 +1,7 @@
 
 <html xmlns:th="http://www.thymeleaf.org" 
 xmlns:layout="www.ultraq.net.nz/thymeleaf/layout"
-layout:decorator="template1">
+>
 <head>
 <meta charset="UTF-8"/>
 	<title>WITH MY KIDS</title>
@@ -100,30 +100,21 @@ layout:decorator="template1">
 
 <body class="home">
 	<!-- Fixed navbar -->
-	<div class="navbar navbar-inverse navbar-fixed-top headroom" >
+	<div class="navbar navbar-inverse navbar-fixed-top headroom" style="background: dimgray">
 		<div class="container">
 			<div class="navbar-header">
 				<!-- Button for smallest screens -->
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-				<a class="navbar-brand" href="index.html"><img src="assets/images/logo.png" alt="Progressus HTML5 template"></a>
+				<a class="navbar-brand" href="index.html"><img src="assets/images/logo.png" alt="Progressus HTML5 template"/></a>
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav pull-right">
-					<li class="active"><a href="#">Home</a></li>
-					<li><a th:href="@{/ajouterEnfant}">ajouterEnfant</a></li>
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">More Pages <b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li><a href="sidebar-left.html">Left Sidebar</a></li>
-							<li class="active"><a href="sidebar-right.html">Right Sidebar</a></li>
-						</ul>
-					</li>
-					<li><a href="contact.html">Contact</a></li>
-					<li><a class="btn" href="signin.html">SIGN IN / SIGN UP</a></li>
-				</ul>
+					<li><a class="btn btn-success" th:if="${session.nom}" th:href="@{/ajouterAnnonce}">Proposer une Annoce</a></li>
+					<li><a class="btn" th:if="${session.nom==null}" th:href="@{/login}">SE CONNECTER</a></li>
+					</ul>
 			</div><!--/.nav-collapse -->
 		</div>
-	</div> 
+	</div>  
 	<!-- /.navbar -->
 
 	<!-- Header -->
@@ -132,9 +123,9 @@ layout:decorator="template1">
 		<div class="container">
 			<div class="row">
 			<form action="RechercheAnnonce" method="post">
-				<h1 class="lead">AWESOME, CUSTOMIZABLE, FREE</h1>
+			<h1 class="lead"> LE MEILLIEURE ENVIRENNEMENT POUR VOS ENFANTS</h1>
 				<p class="tagline">PROGRESSUS: free business bootstrap template by <a href="http://www.gettemplate.com/?utm_source=progressus&amp;utm_medium=template&amp;utm_campaign=progressus">GetTemplate</a></p>
-				<p><input type="text" name="ville" class="btn btn-default btn-lg" placeholder="Entrez la ville" ></input> <input type="text" name="dateR" class="btn btn-default btn-lg" placeholder="date AAAA/MM/DD" ></input>
+				<p><input type="text" name="ville" class="btn btn-default btn-lg" placeholder="Entrez la ville" ></input> <input type="date" name="dateR" class="btn btn-default btn-lg" placeholder="date AAAA/MM/DD" >
 				 <button type="submit" class="btn btn-action btn-lg" role="button">Recherche</button></p>
 			</form>
 			</div>

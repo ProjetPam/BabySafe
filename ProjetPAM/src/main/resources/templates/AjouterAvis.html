@@ -20,7 +20,7 @@ layout:decorator="template1">
       <td>
       <h3 style="color: maroon" >Besancon</h3>
       <h5 class="card-title" th:text="${'Date Annonce : '+Annonce.date_annonce.toGMTString().substring(0, 11)}">
-      </h5><h5 class="card-title" th:text="${'Heure Depart : '+Annonce.heure_depart.getHours()+':00'}">Date depart</h5> 
+      </h5><h5 class="card-title" th:text="${'Heure Debut : '+Annonce.heure_depart.getHours()+':00'}">Date depart</h5> 
       <h5 class="card-title" th:text="${'Heure Fin : '+Annonce.heure_fini.getHours()+':00'}">Date depart</h5></td>
       <td><p class="card-text" th:text="${Annonce.description}"/></td>
       <td><input type="hidden" name="idAnnonce"   th:value="${Annonce.numero_annonce}"  />

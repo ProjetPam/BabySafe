@@ -1,6 +1,9 @@
 package org.pam.controlleur;
 
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
 
 import javax.servlet.http.HttpSession;
@@ -99,10 +102,13 @@ public class ControllerAnnonces  {
 	
 	@RequestMapping("/MesAnnonces")
 	public String mesAnoonoces(Model model,HttpSession session) {
+		if(session.getAttribute("idUtilisateur") != null){
 		int idUtilisateur=Integer.parseInt(session.getAttribute("idUtilisateur").toString());
 		model.addAttribute("mesAnnonces", annonceService.getAllAnoncesByUtilisateur(idUtilisateur));
-		
 		return "MesAnnonces";
+		}
+		return "Authentification";
+		
 	}
 	
 	
@@ -120,8 +126,12 @@ public class ControllerAnnonces  {
 	}
 	
 	@RequestMapping("/RechercheAnnonce")
-	public String RechercheAnnonce(Model model,String ville,Date dateR) {
-		model.addAttribute("listAnnonce",annonceService.getAllAnnceByDate(ville, dateR));
+	public String RechercheAnnonce(Model model,String ville,String dateR) throws ParseException {
+		String madate = dateR.replaceAll("-", "/") + " 00:00:00";
+		
+		Date reportDate = new Date(madate);
+		
+		model.addAttribute("listAnnonce",annonceService.getAllAnnceByDate(ville, reportDate));
 		return "ListeAnnonces";
 	}
 	

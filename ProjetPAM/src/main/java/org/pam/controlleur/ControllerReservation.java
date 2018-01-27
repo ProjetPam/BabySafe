@@ -39,11 +39,13 @@ public class ControllerReservation {
 	
 	@RequestMapping("/ListReservations")
 	public String ListeReservation(Model model,HttpSession session) {
-
+		if(session.getAttribute("idUtilisateur") != null){
 		int idUtilisateur=Integer.parseInt(session.getAttribute("idUtilisateur").toString());
 		model.addAttribute("ListReservation", reservationService.getAllReservationByUtilisateur(idUtilisateur));
-		
 		return "MesReservation";
+		}
+		
+		return "Authentification";
 	}
 	
 	
@@ -51,11 +53,14 @@ public class ControllerReservation {
 	
 	@RequestMapping("/Reservation")
 	public String Reservation(Model model,int idAnnonce,HttpSession session) throws Exception{
+		if(session.getAttribute("idUtilisateur") != null){
 		int idUtilisateur=Integer.parseInt(session.getAttribute("idUtilisateur").toString());
+		
 		model.addAttribute("nombrePoints", utilisateurService.getUtilisateurById(idUtilisateur));
 		model.addAttribute("ListeEnfants",enfantService.getEnfantsByUtilisateur(idUtilisateur));
 		model.addAttribute("Annonce",annonceService.getAnnonceByID(idAnnonce));
-		return "Paiement";
+		return "Paiement";}
+		return "Authentification";
 	}
 	
 	
@@ -81,10 +86,14 @@ public class ControllerReservation {
 	@RequestMapping("/HistoriqueReservations")
 	public String HistoriqueReservations(Model model,HttpSession session) {
 
+		if(session.getAttribute("idUtilisateur") != null){
 		int idUtilisateur=Integer.parseInt(session.getAttribute("idUtilisateur").toString());
+		
 		model.addAttribute("ListReservation", reservationService.getHistoriqueReservationByUtilisateur(idUtilisateur));
 		model.addAttribute("SommeVerser",reservationService.getArgentVerser(idUtilisateur));
 		return "Argents";
+		}
+		return "Authentification";
 	}
 	
 	
@@ -102,23 +111,28 @@ public class ControllerReservation {
 	@RequestMapping("/DonnerAvis")
 	public String donerAvis(Model model,HttpSession session,int idAnnonce) throws Exception {
 
-		//int idUtilisateur=Integer.parseInt(session.getAttribute("idUtilisateur").toString());
+		if(session.getAttribute("idUtilisateur") != null){
 		model.addAttribute("Annonce", annonceService.getAnnonceByID(idAnnonce));
 		model.addAttribute("allAvis", avisService.getAvisByannonce(idAnnonce));
 		return "AjouterAvis";
+		}
+		return "Authentification";
 	}
 	
 	@RequestMapping("/addAvis")
 	public String addAvis(Model model,HttpSession session,int idAnnonce
 			,String comment,int note) throws Exception {
 
+		if(session.getAttribute("idUtilisateur") != null){
 		int idUtilisateur=Integer.parseInt(session.getAttribute("idUtilisateur").toString());
 		
 		Annonce annonce=annonceService.getAnnonceByID(idAnnonce);
 		Utilisateur utilisateur=utilisateurService.getUtilisateurById(idUtilisateur);
 		avisService.addAvis(utilisateur,annonce,comment, note);
-		
 		return "AjouterAvis";
+		}
+		
+		return "Authentification";
 	}
 	
 	
