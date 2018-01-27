@@ -300,4 +300,11 @@ public class ReservationServiceImpl implements ReservationService {
 		return Somme;
 	}
 
+	@Override
+	public Collection<Reservation> getReservationConfirmeeByUtilisateur(
+			int idUtilisateur) {
+		
+		return repositoryReservation.getReservationConfirmer(idUtilisateur);
+	}
+
 }

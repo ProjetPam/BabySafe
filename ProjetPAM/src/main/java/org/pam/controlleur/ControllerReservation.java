@@ -4,7 +4,10 @@ import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
+import org.pam.model.Annonce;
+import org.pam.model.Utilisateur;
 import org.pam.service.AnnonceService;
+import org.pam.service.AvisService;
 import org.pam.service.EnfantService;
 import org.pam.service.ReservationService;
 import org.pam.service.UtilisateurService;
@@ -30,6 +33,9 @@ public class ControllerReservation {
 	
 	@Autowired
     private ReservationService reservationservice;
+	
+	@Autowired
+	private AvisService avisService;
 	
 	@RequestMapping("/ListReservations")
 	public String ListeReservation(Model model,HttpSession session) {
@@ -79,6 +85,40 @@ public class ControllerReservation {
 		model.addAttribute("ListReservation", reservationService.getHistoriqueReservationByUtilisateur(idUtilisateur));
 		model.addAttribute("SommeVerser",reservationService.getArgentVerser(idUtilisateur));
 		return "Argents";
+	}
+	
+	
+	
+	
+	@RequestMapping("/Avis")
+	public String Avis(Model model,HttpSession session) {
+
+		int idUtilisateur=Integer.parseInt(session.getAttribute("idUtilisateur").toString());
+		model.addAttribute("ListReservation", reservationService.getReservationConfirmeeByUtilisateur(idUtilisateur));
+		
+		return "Avis";
+	}
+	
+	@RequestMapping("/DonnerAvis")
+	public String donerAvis(Model model,HttpSession session,int idAnnonce) throws Exception {
+
+		//int idUtilisateur=Integer.parseInt(session.getAttribute("idUtilisateur").toString());
+		model.addAttribute("Annonce", annonceService.getAnnonceByID(idAnnonce));
+		model.addAttribute("allAvis", avisService.getAvisByannonce(idAnnonce));
+		return "AjouterAvis";
+	}
+	
+	@RequestMapping("/addAvis")
+	public String addAvis(Model model,HttpSession session,int idAnnonce
+			,String comment,int note) throws Exception {
+
+		int idUtilisateur=Integer.parseInt(session.getAttribute("idUtilisateur").toString());
+		
+		Annonce annonce=annonceService.getAnnonceByID(idAnnonce);
+		Utilisateur utilisateur=utilisateurService.getUtilisateurById(idUtilisateur);
+		avisService.addAvis(utilisateur,annonce,comment, note);
+		
+		return "AjouterAvis";
 	}
 	
 	

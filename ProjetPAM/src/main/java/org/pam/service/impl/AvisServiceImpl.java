@@ -1,6 +1,7 @@
 package org.pam.service.impl;
 
-import java.sql.Timestamp;
+
+import java.util.Collection;
 import java.util.Date;
 
 import org.pam.model.Annonce;
@@ -23,21 +24,22 @@ public class AvisServiceImpl implements AvisService{
 	public void addAvis(Utilisateur utilisateurComentateur, Annonce annonce,
 			String commentaire, int note) {
 
-		Date dateActuel=new Date();
-		long timeActuel=dateActuel.getTime();
-		long timeAnnonce=annonce.getHeure_fini().getTime();
-		
-		
-if(timeAnnonce < timeActuel){
 	
-	
-	repositoryAvis.save(new Avis((Timestamp) new Date(), commentaire, note, annonce, utilisateurComentateur));
-	
-}
-		
-		
+	repositoryAvis.save(new Avis(new Date(), commentaire, note, annonce, utilisateurComentateur));
 		
 		
 	}
+
+
+
+	@Override
+	public Collection<Avis> getAvisByannonce(int idAnnonce) {
+		
+		return repositoryAvis.getAllAvisByAnnonce(idAnnonce);
+	}
+
+
+
+	
 
 }

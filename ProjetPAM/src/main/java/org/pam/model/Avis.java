@@ -1,6 +1,6 @@
 package org.pam.model;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,7 +16,7 @@ public class Avis  {
 	@Id
 	@GeneratedValue
 	private Long id;
-	private Timestamp date_avis;
+	private Date date_avis;
 	private String commentaire;
 	private int note;
 	@ManyToOne
@@ -33,7 +33,7 @@ public class Avis  {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Avis(Timestamp date_avis, String commentaire, int note,
+	public Avis(Date date_avis, String commentaire, int note,
 			Annonce annonce, Utilisateur utilisateur) {
 		super();
 		this.date_avis = date_avis;
@@ -51,11 +51,11 @@ public class Avis  {
 		this.id = id;
 	}
 
-	public Timestamp getDate_avis() {
+	public Date getDate_avis() {
 		return date_avis;
 	}
 
-	public void setDate_avis(Timestamp date_avis) {
+	public void setDate_avis(Date date_avis) {
 		this.date_avis = date_avis;
 	}
 

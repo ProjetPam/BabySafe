@@ -12,7 +12,7 @@ layout:decorator="template1">
 <table class="table table-striped" style="color: black;">
   <thead>
     <tr class="bg-primary">
-      <td scope="col">Date de réservation</td>
+      <td scope="col">L'annoceur</td>
       <td scope="col">Prenom de votre enfant</td>
       <td scope="col">Date Annonce</td>
       <td scope="col">Prix</td>
@@ -21,14 +21,13 @@ layout:decorator="template1">
   </thead>
   <tbody>
     <tr th:each="ListReservation:${ListReservation}">
-      <td th:text="${ListReservation.dateReservation}">@mdo</td>
+      <td th:text="${ListReservation.annonce.utilisateur.nom+' '+ListReservation.annonce.utilisateur.prenom}">@mdo</td>
       <td th:text="${ListReservation.enfant.prenom}">Otto</td>
       <td th:text="${ListReservation.annonce.date_annonce.toGMTString().substring(0, 11)}">Mark</td>
       <td th:text="${ListReservation.annonce.prix}">Mark</td>
       <td>
-      <a class="btn btn-success" th:href="@{/AnnulerAnnonce}+'?idReservation='+${ListReservation.idReservation}" >Modifier</a>
-     <a class="btn btn-danger" th:href="@{/annulerReservation}+'?idReservation='+${ListReservation.idReservation}" >Annuler</a></td>
-      
+     <a class="btn btn-success" th:href="@{/DonnerAvis}+'?idAnnonce='+${ListReservation.annonce.numero_annonce}" >Donner un avis</a></td>
+    
     </tr>
     
   </tbody>

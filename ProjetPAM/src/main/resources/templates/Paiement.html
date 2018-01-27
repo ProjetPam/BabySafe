@@ -71,7 +71,7 @@
 							<div class="panel-body">
                <input type="hidden" name="idAnnonce" th:value="${Annonce.numero_annonce}"></input>
 				<div class="card-body">
-					<h4 class="card-title" th:text="${'Date d annonce : '+Annonce.date_annonce.toGMTString().substring(0, 12)}">Date
+					<h4 class="card-title" th:text="${'Date d annonce : '+Annonce.date_annonce.toGMTString().substring(0, 11)}">Date
 						depart</h4>
 					
 					<h5 class="card-title" th:text="${'Heure départ '+Annonce.heure_depart.getHours()+':00 | heure fin  '+Annonce.heure_fini.getHours()+':00'}">Date

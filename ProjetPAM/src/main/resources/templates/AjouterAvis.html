@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+xmlns:layout="www.ultraq.net.nz/thymeleaf/layout"
+layout:decorator="template1">
+<head>
+<meta charset="UTF-8"/>
+<title>Insert title here</title>
+</head>
+<body>
+
+
+<div layout:fragment="content">
+
+<div class="container" style="color: black;" th:each="Annonce:${Annonce}">
+<form action="addAvis" method="post">
+<table class="table" style="color: black;" >
+     <tr>
+      <td><img src="http://static.debray-jerome.fr/49/images/slideshow/1.jpg" height="100" width="300" class="rounded mx-auto d-block" alt="..."/>
+      <h5 style="color: maroon"  th:text="${Annonce.utilisateur.nom+' '+Annonce.utilisateur.prenom}">Date depart</h5></td>
+      <td>
+      <h3 style="color: maroon" >Besancon</h3>
+      <h5 class="card-title" th:text="${'Date Annonce : '+Annonce.date_annonce.toGMTString().substring(0, 11)}">
+      </h5><h5 class="card-title" th:text="${'Heure Depart : '+Annonce.heure_depart.getHours()+':00'}">Date depart</h5> 
+      <h5 class="card-title" th:text="${'Heure Fin : '+Annonce.heure_fini.getHours()+':00'}">Date depart</h5></td>
+      <td><p class="card-text" th:text="${Annonce.description}"/></td>
+      <td><input type="hidden" name="idAnnonce"   th:value="${Annonce.numero_annonce}"  />
+      <h2 style="color: green" th:text="${Annonce.prix+'0 €'}">Date depart</h2>
+      <h4 style="color: green">Par Heure</h4></td>
+    </tr>
+  
+   <tr>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+     
+</table>
+<p style="float: left;">Faire un commentaire</p>
+      <textarea name="comment"    class="form-control" >  
+			</textarea>
+			<p style="float: left; margin-top: 60px">Noter cette annonce</p>
+<label><input type="radio" name="note"  value="1"><img style="margin-right: 100px" width="150" height="150" src="../img/Eviter.png"/></input>
+
+<input type="radio" name="note"  value="2"><img style="margin-right: 100px" src="../img/cava.jpg" width="150" height="150"/></input>
+
+<input type="radio" name="note" checked="checked"  value="3"><img  style="margin-right: 100px"  src="../img/SuperBien.jpg" width="150" height="150"/></input>
+
+</label><br/>
+<p style="margin-top: 20;"></p>
+
+<button  type="submit" class="btn btn-primary">Publier </button>
+
+
+</form>
+<div th:each="allAvis:${allAvis}">
+<h4 style="float: left;" th:text="${'Commnté par '+allAvis.utilisateur.prenom+' le '+allAvis.date_avis.toGMTString().substring(0, 11)}"></h4>
+<textarea name="comment" th:text="${allAvis.commentaire}" disabled="disabled"  class="form-control" >  
+			</textarea></div>
+</div>
+</div>
+
+
+</body>
+</html>

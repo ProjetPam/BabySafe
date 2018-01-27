@@ -19,4 +19,7 @@ public interface RepositoryReservation  extends JpaRepository<Reservation, Long>
 	@Query("select r from Reservation r  where r.annonce.utilisateur.numero=:x ")
 	public Collection<Reservation> getHistoriqueReservationByUtilisateur(@Param("x") int idutilisateur);
 	
+	
+	@Query("select r from Reservation r  where r.annonce.utilisateur.numero=:x and r.statut ='confirmee' ")
+	public Collection<Reservation> getReservationConfirmer(@Param("x") int idutilisateur);
 }

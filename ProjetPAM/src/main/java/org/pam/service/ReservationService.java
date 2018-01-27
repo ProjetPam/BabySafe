@@ -19,5 +19,7 @@ public interface ReservationService {
 	        public Collection<Reservation> getHistoriqueReservationByUtilisateur(int idUtilisateur);
 	        
 	        public Double getArgentVerser(int idUtilisateur);
+	        public Collection<Reservation> getReservationConfirmeeByUtilisateur(int idUtilisateur);
+	        
 	        
 }
