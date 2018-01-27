@@ -100,17 +100,17 @@ xmlns:layout="www.ultraq.net.nz/thymeleaf/layout"
 
 <body class="home">
 	<!-- Fixed navbar -->
-	<div class="navbar navbar-inverse navbar-fixed-top headroom" style="background: dimgray">
+	<div class="navbar navbar-inverse navbar-fixed-top headroom" style="background: #4ad06d">
 		<div class="container">
 			<div class="navbar-header">
 				<!-- Button for smallest screens -->
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-				<a class="navbar-brand" href="index.html"><img src="assets/images/logo.png" alt="Progressus HTML5 template"/></a>
+				<a class="navbar-brand" href="index.html"><img src="assets/images/logo.png"   width="600" height="100"    alt="Progressus HTML5 template"/></a>
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav pull-right">
-					<li><a class="btn btn-success" th:if="${session.nom}" th:href="@{/ajouterAnnonce}">Proposer une Annoce</a></li>
-					<li><a class="btn" th:if="${session.nom==null}" th:href="@{/login}">SE CONNECTER</a></li>
+					<li><a class="btn" style="color: #4ad06d;background:white" th:if="${session.nom}" th:href="@{/ajouterAnnonce}">Proposer une Annoce</a></li>
+					<li><a class="btn" style="color: #4ad06d;background:white" th:if="${session.nom==null}" th:href="@{/login}">SE CONNECTER</a></li>
 					</ul>
 			</div><!--/.nav-collapse -->
 		</div>
@@ -125,7 +125,7 @@ xmlns:layout="www.ultraq.net.nz/thymeleaf/layout"
 			<form action="RechercheAnnonce" method="post">
 			<h1 class="lead"> LE MEILLIEURE ENVIRENNEMENT POUR VOS ENFANTS</h1>
 				<p class="tagline">PROGRESSUS: free business bootstrap template by <a href="http://www.gettemplate.com/?utm_source=progressus&amp;utm_medium=template&amp;utm_campaign=progressus">GetTemplate</a></p>
-				<p><input type="text" name="ville" class="btn btn-default btn-lg" placeholder="Entrez la ville" ></input> <input type="date" name="dateR" class="btn btn-default btn-lg" placeholder="date AAAA/MM/DD" >
+				<p><input type="text" name="ville" class="btn btn-default btn-lg" placeholder="Entrez la ville" ></input> <input type="date" style="height: 48px;" name="dateR" class="btn btn-default btn-lg" placeholder="date AAAA/MM/DD" >
 				 <button type="submit" class="btn btn-action btn-lg" role="button">Recherche</button></p>
 			</form>
 			</div>
