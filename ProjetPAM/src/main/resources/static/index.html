@@ -5,67 +5,7 @@ xmlns:layout="www.ultraq.net.nz/thymeleaf/layout"
 <head>
 <meta charset="UTF-8"/>
 	<title>WITH MY KIDS</title>
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-<script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
-<link rel="stylesheet" href="img/main.css"/>
 
-<!-- <script type="text/javascript"  src="img/prototype-1.js"></script> -->
-<!-- 			<script type="text/javascript"  src="img/prototype-base-extensions.js"></script> -->
-<!-- 			<script type="text/javascript" src="img/prototype-date-extensions.js"></script> -->
-<!-- 			<script type="text/javascript"  src="img/behaviour.js"></script> -->
-<!-- 							<script type="text/javascript"  src="img/datepicker.js"></script> -->
-<!-- 										<link rel="stylesheet" href="img/datepicker.css"> -->
-<!-- 							<script type="text/javascript"  src="img/behaviors.js"></script> -->
-
-			<script type="text/javascript">
-				   var bindDatePicker = function() {
-					   console.log("ok");
-						$(".date").datetimepicker({
-				        format:'YYYY-MM-DD',
-							icons: {
-								time: "fa fa-clock-o",
-								date: "fa fa-calendar",
-								up: "fa fa-arrow-up",
-								down: "fa fa-arrow-down"
-							}
-						}).find('input:first').on("blur",function () {
-							// check if the date is correct. We can accept dd-mm-yyyy and yyyy-mm-dd.
-							// update the format if it's yyyy-mm-dd
-							var date = parseDate($(this).val());
-
-							if (! isValidDate(date)) {
-								//create date based on momentjs (we have that)
-								date = moment().format('YYYY-MM-DD');
-							}
-
-							$(this).val(date);
-						});
-					}
-				   
-				   var isValidDate = function(value, format) {
-						format = format || false;
-						// lets parse the date to the best of our knowledge
-						if (format) {
-							value = parseDate(value);
-						}
-
-						var timestamp = Date.parse(value);
-
-						return isNaN(timestamp) == false;
-				   }
-				   
-				   var parseDate = function(value) {
-						var m = value.match(/^(\d{1,2})(\/|-)?(\d{1,2})(\/|-)?(\d{4})$/);
-						if (m)
-							value = m[5] + '-' + ("00" + m[3]).slice(-2) + '-' + ("00" + m[1]).slice(-2);
-
-						return value;
-				   }
-				   
-				   bindDatePicker();
-			
-			
-			</script>
 			<script  type="text/javascript"  src="img/prototype-base-extensions.js"></script>
 			<script  type="text/javascript"  src="img/prototype-date-extensions.js"></script>
 			<script  type="text/javascript"  src="img/behaviour.js"></script>
@@ -123,9 +63,11 @@ xmlns:layout="www.ultraq.net.nz/thymeleaf/layout"
 		<div class="container">
 			<div class="row">
 			<form action="RechercheAnnonce" method="post">
-			<h1 class="lead"> LE MEILLIEURE ENVIRENNEMENT POUR VOS ENFANTS</h1>
+			<h1 class="lead" style="color: blue;"> LE MEILLIEURE ENVIRENNEMENT POUR VOS ENFANTS</h1>
 				<p class="tagline">PROGRESSUS: free business bootstrap template by <a href="http://www.gettemplate.com/?utm_source=progressus&amp;utm_medium=template&amp;utm_campaign=progressus">GetTemplate</a></p>
-				<p><input type="text" name="ville" class="btn btn-default btn-lg" placeholder="Entrez la ville" ></input> <input type="date" style="height: 48px;" name="dateR" class="btn btn-default btn-lg" placeholder="date AAAA/MM/DD" >
+				<p><input type="text" style="background: limegreen;color: white;" name="ville" class="btn btn-default btn-lg" placeholder="Entrez la ville" >
+				</input> 
+				<input type="date" style="height: 48px;background: limegreen; color:slategray;" name="dateR" class="btn btn-default btn-lg" placeholder="date AAAA/MM/DD" >
 				 <button type="submit" class="btn btn-action btn-lg" role="button">Recherche</button></p>
 			</form>
 			</div>

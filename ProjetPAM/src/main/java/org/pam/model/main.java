@@ -3,7 +3,10 @@ package org.pam.model;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -36,12 +39,28 @@ public class main {
 	
 		//long diff =  ts1.getTime() - ts2.getTime() ;
 		
-	  SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
-	  sdf.setLenient(false);
-	  Date dt2 = sdf.parse("003/1/2011");
-	  System.out.println(dt2);
+	  Date dateactu=new Date();
+	  Calendar c = Calendar.getInstance();
+	  int anneeEncours = c.get(Calendar.YEAR);
 		
-             //System.out.println(d);
+		System.out.println(anneeEncours);
+		
+		
+		List<String> periodeAnneeEnCours = new ArrayList<>();
+		
+		for(int i=1;i<=9;i++){
+			periodeAnneeEnCours.add(anneeEncours+"/0"+i+"/01");
+			periodeAnneeEnCours.add(anneeEncours+"/0"+i+"/31");
+		}
+		for(int i=10;i<=12;i++){
+			periodeAnneeEnCours.add(anneeEncours+"/"+i+"/01");
+			periodeAnneeEnCours.add(anneeEncours+"/"+i+"/31");
+		}
+		for(int i=0;i< periodeAnneeEnCours.size() ;i=i+2){
+			System.out.println("dd" + periodeAnneeEnCours.get(i));
+			System.out.println("df" + periodeAnneeEnCours.get(i+1));
+		}
+		
 	}
 	
 	

@@ -10,11 +10,15 @@ import org.pam.service.AnnonceService;
 import org.pam.service.AvisService;
 import org.pam.service.EnfantService;
 import org.pam.service.ReservationService;
+import org.pam.service.StatistiqueService;
 import org.pam.service.UtilisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+//import com.google.gson.JsonObject;
 
 @Controller
 public class ControllerReservation {
@@ -36,6 +40,9 @@ public class ControllerReservation {
 	
 	@Autowired
 	private AvisService avisService;
+	
+	@Autowired
+	private StatistiqueService statistiqueService;
 	
 	@RequestMapping("/ListReservations")
 	public String ListeReservation(Model model,HttpSession session) {
@@ -71,6 +78,7 @@ public class ControllerReservation {
 		
 		reservationservice.annulerReservation(1, idReservation, idUtilisateur);
 		return "MesReservation";
+		
 	}
 	
 	@RequestMapping("/Paiement")
@@ -133,6 +141,15 @@ public class ControllerReservation {
 		}
 		
 		return "Authentification";
+	}
+	
+	
+	@RequestMapping(value="/getStatistique",produces={"application/json; charset=utf-8"})
+	public Double getStatistique(Model model) throws Exception {
+
+		
+		
+		return statistiqueService.getStatistiqueParMois();
 	}
 	
 	

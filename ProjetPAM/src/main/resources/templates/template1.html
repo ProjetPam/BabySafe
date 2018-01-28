@@ -35,21 +35,26 @@ xmlns:layout="www.ultraq.net.nz/thymeleaf/layout">
 <header>
 
 	<!-- Fixed navbar -->
-	<div class="navbar navbar-inverse navbar-fixed-top headroom" style="background: dimgray">
+	<div class="navbar navbar-inverse navbar-fixed-top headroom" style="background: #4ad06d">
 		<div class="container">
 			<div class="navbar-header">
 				<!-- Button for smallest screens -->
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-				<a class="navbar-brand" href="index.html"><img src="assets/images/logo.png" alt="Progressus HTML5 template"/></a>
+				<a class="navbar-brand" href="index.html"><img src="assets/images/logo.png"   width="600" height="100"    alt="Progressus HTML5 template"/></a>
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav pull-right">
-					<li><a th:if="${session.nom}" th:href="@{/ajouterAnnonce}">Proposer une Annoce</a></li>
-					<li><a class="btn" th:if="${session.nom==null}" th:href="@{/login}">SE CONNECTER</a></li>
-					<li><a style="color:red"  th:if="${session.nom}" th:text="${'Connetcé en tant que : '+session.nom}" th:unless="${session == null}">SIGN IN / SIGN UP</a></li>
-				    <li><a class="btn" th:if="${session.nom}" th:href="@{/logout}">SE DECONNECTER</a></li>
+					
+					<li><a class="btn" style="color: #4ad06d;background:white"  th:if="${session.nom}" th:href="@{/ajouterAnnonce}">Proposer une Annoce</a></li>
+					<li><a class="btn" style="color: #4ad06d;background:white"  th:if="${session.nom==null}" th:href="@{/login}">SE CONNECTER</a></li>
+					
+				    <li><a class="btn" style="color: #4ad06d;background:white"  th:if="${session.nom}" th:href="@{/logout}">SE DECONNECTER</a><a style="color:red"  th:if="${session.nom}" th:text="${'Bienvenue : '+session.nom}" th:unless="${session == null}">SIGN IN / SIGN UP</a></li>
 				</ul>
+
 			</div><!--/.nav-collapse -->
+			
+			
+			
 		</div>
 	</div> 
 	</header>
