@@ -45,7 +45,7 @@ xmlns:layout="www.ultraq.net.nz/thymeleaf/layout">
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav pull-right">
 					<li><a class="btn" style="color: #4ad06d;background:white"   th:href="@{/ListeAnnonces}">Toutes les Annonces</a></li>
-					<li><a class="btn" style="color: #4ad06d;background:white"   th:href="@{/ajouterAnnonce}">Proposer une Annoce</a></li>
+					<li><a class="btn" style="color: #4ad06d;background:white"   th:href="@{/ajouterAnnonce}">Proposer une Annonce</a></li>
 					<li><a class="btn" style="color: #4ad06d;background:white"  th:if="${session.nom==null}" th:href="@{/login}">SE CONNECTER</a></li>
 					
 				    <li><a class="btn" style="color: #4ad06d;background:white"  th:if="${session.nom}" th:href="@{/logout}">SE DECONNECTER</a><a style="color:white;font-weight: bold;"  th:if="${session.nom}" th:text="${'Bienvenue : '+session.nom}" th:unless="${session == null}">SIGN IN / SIGN UP</a></li>

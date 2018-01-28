@@ -50,7 +50,7 @@ xmlns:layout="www.ultraq.net.nz/thymeleaf/layout"
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav pull-right">
 					<li><a class="btn" style="color: #4ad06d;background:white"  href="/ajouterAnnonce">Proposer une Annoce</a></li>
-					<li><a class="btn" style="color: #4ad06d;background:white" th:if="${session.nom==null}" th:href="@{/login}">SE CONNECTER</a></li>
+					<li><a class="btn" style="color: #4ad06d;background:white" th:if="${session.nom==null}" href="/login">SE CONNECTER</a></li>
 					</ul>
 			</div><!--/.nav-collapse -->
 		</div>
