@@ -10,6 +10,7 @@ import java.util.Map;*/
 
 //import jnr.ffi.types.size_t;
 
+import java.text.DateFormatSymbols;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -54,7 +55,53 @@ public class StatistiqueServiceImpl implements StatistiqueService {
 			for(int i=0;i< periodeAnneeEnCours.size() ;i=i+2){
 				Date dat1 = new Date(periodeAnneeEnCours.get(i));
 				Date dat2 = new Date(periodeAnneeEnCours.get(i+1));
-				statisticMonth.add("Le benifice de mois de "+dat1.getMonth()+" est "+repositoryStatistique.getStatistiqueParMois(dat1,dat2)+" €");
+				//statisticMonth.add("Le benifice de mois de "+dat1.toGMTString().substring(3, 11)+" est "+repositoryStatistique.getStatistiqueParMois(dat1,dat2)+" €");
+				statisticMonth.add(dat1.toGMTString().substring(3, 11)+""+repositoryStatistique.getStatistiqueParMois(dat1,dat2));
+				
+				
+				
+				//statisticMonth.put(dat1.getMonth(), 
+					//	repositoryStatistique.getStatistiqueParMois(dat1,dat2));
+			}
+		return statisticMonth;
+	}
+
+	@Override
+	public List<String> getStatistiqueParAnne(long annee) {
+		Calendar c = Calendar.getInstance();
+		  long anneeEncours = annee;
+		  //JsonArray jsonarr = new JsonArray();
+			
+			System.out.println(anneeEncours);
+			//HashMap<Integer, Double> statisticMonth = new HashMap<>();
+			
+			List<String> statisticMonth=new ArrayList<>();
+			List<String> periodeAnneeEnCours = new ArrayList<>();
+			
+			for(int i=1;i<=9;i++){
+				periodeAnneeEnCours.add(anneeEncours+"/0"+i+"/01");
+				periodeAnneeEnCours.add(anneeEncours+"/0"+i+"/31");
+			}
+			for(int i=10;i<=12;i++){
+				periodeAnneeEnCours.add(anneeEncours+"/"+i+"/01");
+				periodeAnneeEnCours.add(anneeEncours+"/"+i+"/31");
+			}
+			for(int i=0;i< periodeAnneeEnCours.size() ;i=i+2){
+				Date dat1 = new Date(periodeAnneeEnCours.get(i));
+				int vv = dat1.getMonth();
+				 String month = "wrong";
+				    DateFormatSymbols dfs = new DateFormatSymbols();
+				    String[] months = dfs.getMonths();
+				        if (vv >= 0 && vv <= 11 ) {
+				            month = months[vv];
+				        }
+				    
+				Date dat2 = new Date(periodeAnneeEnCours.get(i+1));
+				//statisticMonth.add("Le benifice de mois de "+dat1.toGMTString().substring(3, 11)+" est "+repositoryStatistique.getStatistiqueParMois(dat1,dat2)+" €");
+				statisticMonth.add(month+"/"+repositoryStatistique.getStatistiqueParMois(dat1,dat2));
+				
+				
+				
 				//statisticMonth.put(dat1.getMonth(), 
 					//	repositoryStatistique.getStatistiqueParMois(dat1,dat2));
 			}

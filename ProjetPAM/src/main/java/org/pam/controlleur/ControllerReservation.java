@@ -109,11 +109,12 @@ public class ControllerReservation {
 	
 	@RequestMapping("/Avis")
 	public String Avis(Model model,HttpSession session) {
-
+		if(session.getAttribute("idUtilisateur") != null){
 		int idUtilisateur=Integer.parseInt(session.getAttribute("idUtilisateur").toString());
 		model.addAttribute("ListReservation", reservationService.getReservationConfirmeeByUtilisateur(idUtilisateur));
 		
-		return "Avis";
+		return "Avis";}
+		return "Authentification";
 	}
 	
 	@RequestMapping("/DonnerAvis")
@@ -152,5 +153,12 @@ public class ControllerReservation {
 		return "Statistique";
 	}
 	
+	@RequestMapping(value="/StatistiqueRecherche")
+	public String getStatistiqueAnnee(Model model,int dateR) throws Exception {
+
+		model.addAttribute("ListStatistique", statistiqueService.getStatistiqueParAnne(dateR));
+		
+		return "Statistique";
+	}
 	
 }

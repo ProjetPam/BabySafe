@@ -59,6 +59,10 @@ public class main {
 		for(int i=0;i< periodeAnneeEnCours.size() ;i=i+2){
 			System.out.println("dd" + periodeAnneeEnCours.get(i));
 			System.out.println("df" + periodeAnneeEnCours.get(i+1));
+			
+			String bb="biiii";
+			//bb.length()
+			
 		}
 		
 	}

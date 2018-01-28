@@ -13,4 +13,5 @@ public interface StatistiqueService {
 
 	//public @ResponseBody JsonObject getStatistiqueParMois();
 	public List<String>  getStatistiqueParMois();
+	public List<String>  getStatistiqueParAnne(long annee);
 }
