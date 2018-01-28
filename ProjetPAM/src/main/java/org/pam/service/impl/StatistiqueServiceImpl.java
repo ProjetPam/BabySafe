@@ -10,6 +10,12 @@ import java.util.Map;*/
 
 //import jnr.ffi.types.size_t;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+
 import org.pam.repository.RepositoryStatistique;
 import org.pam.service.StatistiqueService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +32,33 @@ public class StatistiqueServiceImpl implements StatistiqueService {
 	private RepositoryStatistique repositoryStatistique;
 
 	@Override
-	public Double getStatistiqueParMois() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<String> getStatistiqueParMois() {
+		Calendar c = Calendar.getInstance();
+		  int anneeEncours = c.get(Calendar.YEAR);
+		  //JsonArray jsonarr = new JsonArray();
+			
+			System.out.println(anneeEncours);
+			//HashMap<Integer, Double> statisticMonth = new HashMap<>();
+			
+			List<String> statisticMonth=new ArrayList<>();
+			List<String> periodeAnneeEnCours = new ArrayList<>();
+			
+			for(int i=1;i<=9;i++){
+				periodeAnneeEnCours.add(anneeEncours+"/0"+i+"/01");
+				periodeAnneeEnCours.add(anneeEncours+"/0"+i+"/31");
+			}
+			for(int i=10;i<=12;i++){
+				periodeAnneeEnCours.add(anneeEncours+"/"+i+"/01");
+				periodeAnneeEnCours.add(anneeEncours+"/"+i+"/31");
+			}
+			for(int i=0;i< periodeAnneeEnCours.size() ;i=i+2){
+				Date dat1 = new Date(periodeAnneeEnCours.get(i));
+				Date dat2 = new Date(periodeAnneeEnCours.get(i+1));
+				statisticMonth.add("Le benifice de mois de "+dat1.getMonth()+" est "+repositoryStatistique.getStatistiqueParMois(dat1,dat2)+" €");
+				//statisticMonth.put(dat1.getMonth(), 
+					//	repositoryStatistique.getStatistiqueParMois(dat1,dat2));
+			}
+		return statisticMonth;
 	}
 	
 	/*

@@ -22,8 +22,8 @@
 							<div class="panel-heading">
 								<p th:each="nb: ${nombrePoints}">
 
-									Le nombre de points que vous avez : <input name="poinUtiliser"
-										th:value="${nb.nombre_points}"></input>
+									Le nombre de points que vous avez : <input name="poinUtiliser" disabled="disabled"
+										th:value="${nb.nombre_points}" style="color: black;"></input>
 								</p>
 							</div>
 							<div class="panel-body">
@@ -32,15 +32,15 @@
 
 								<div class="radio">
 									<label><input type="radio" name="typePaiement"
-										checked="checked" value="Agrent" />Agrent</label>
+										checked="checked" value="Agrent" onclick="poinUtiliser.disabled = true;" />Agrent</label>
 								</div>
 								<div class="radio">
 									<label><input type="radio" name="typePaiement"
-										value="PointsArgent" />Points et Argent</label>
+										value="PointsArgent" onclick="poinUtiliser.disabled = false;poinUtiliser.style.color='magenta';" />Points et Argent</label>
 								</div>
 								<div class="radio disabled">
-									<label><input type="radio" name="typePaiement"
-										value="Points" />Points</label>
+									<label><input type="radio" name="typePaiement" 
+										value="Points" onclick="poinUtiliser.disabled = false;" />Points</label>
 								</div>
 
 							</div>

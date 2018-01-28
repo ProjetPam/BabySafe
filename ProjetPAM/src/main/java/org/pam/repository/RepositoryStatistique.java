@@ -10,8 +10,8 @@ import org.springframework.data.repository.query.Param;
 
 public interface RepositoryStatistique extends JpaRepository<Statistique,Long>{
 
-	//@Query("select o  from Statistique o   ")
-	//public Collection<Statistique> getStatistiqueParMois(@Param("x")Date date1,@Param("y")Date date2);
+	@Query("select sum(benefice)  from Statistique where date_paeiment between :x and :y ")
+	public String getStatistiqueParMois(@Param("x")Date date1,@Param("y")Date date2);
 	
 	
 	

@@ -144,12 +144,12 @@ public class ControllerReservation {
 	}
 	
 	
-	@RequestMapping(value="/getStatistique",produces={"application/json; charset=utf-8"})
-	public Double getStatistique(Model model) throws Exception {
+	@RequestMapping(value="/getStatistique")
+	public String getStatistique(Model model) throws Exception {
 
+		model.addAttribute("ListStatistique", statistiqueService.getStatistiqueParMois());
 		
-		
-		return statistiqueService.getStatistiqueParMois();
+		return "Statistique";
 	}
 	
 	

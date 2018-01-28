@@ -1,6 +1,7 @@
 package org.pam.service;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -11,5 +12,5 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public interface StatistiqueService {
 
 	//public @ResponseBody JsonObject getStatistiqueParMois();
-	public Double  getStatistiqueParMois();
+	public List<String>  getStatistiqueParMois();
 }
