@@ -32,7 +32,7 @@ layout:decorator="template1">
         </div>
         <div class="navbar-collapse collapse sidebar-navbar-collapse">
           <ul class="nav navbar-nav">
-           <li style="width: 190px;"><a style="float: left;" th:if="${session.nom=='zitouni'}" th:href="@{/getStatistique}"  >Statitstique<span  class="badge">1,118</span></a></li>
+           <li style="width: 190px;"><a style="float: left;" th:if="${session.nom=='zitouni'}" th:href="@{/getStatistique}"  >Statitstique</a></li>
             <li style="width: 190px;"><a style="float: left;" th:if="${session.nom!='zitouni'}" href="#" >Profil  </a></li>
             <li ><a style="float: left;" href="#" th:href="@{/MesAnnonces}">Mes annoces</a></li>
             <li ><a href="#" th:href="@{/ListReservations}">Mes réservations</a></li>
