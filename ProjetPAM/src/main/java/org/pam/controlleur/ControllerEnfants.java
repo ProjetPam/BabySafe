@@ -42,6 +42,16 @@ public class ControllerEnfants  {
 		return "Authentification";
 		
 	}
+	@RequestMapping("/mesEnfants")
+	public String mesEnfants(Model model,HttpSession session) throws Exception{
+		if(session.getAttribute("idUtilisateur") != null){
+		int idUtilisateur=Integer.parseInt(session.getAttribute("idUtilisateur").toString());
+		
+		model.addAttribute("ListeEnfants",enfantService.getEnfantsByUtilisateur(idUtilisateur));
+		
+		return "MesAnfants";}
+		return "Authentification";
+	}
 	
 	
 }

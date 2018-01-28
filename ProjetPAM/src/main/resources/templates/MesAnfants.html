@@ -4,14 +4,15 @@ xmlns:layout="www.ultraq.net.nz/thymeleaf/layout"
 layout:decorator="template1">
 <head>
 <meta charset="UTF-8"/>
-<title>Mes Reservation</title>
+<title>Mes enfants</title>
 </head>
 <body>
 <div layout:fragment="content">
+<a id="login_register_btn" style="margin-left: -380px" th:href="@{/sinscrir}" type="button" class="btn btn-primary">Nouvel Enfant</a>
 <div class="container">
 
 <div class="row">
-<div class="col-sm-3">
+ <div class="col-sm-3">
     <div class="sidebar-nav">
       <div class="navbar navbar-default" role="navigation">
         <div class="navbar-header">
@@ -31,45 +32,43 @@ layout:decorator="template1">
             <li ><a href="#" th:href="@{/ListReservations}">Mes réservations</a></li>
             <li style="width: 190px;"><a style="float: left;" href="#" th:href="@{/HistoriqueReservations}">Mon Solde</a></li>
             <li><a href="#" th:href="@{/ajouterAnnonce}">Mes points</a></li>
-            <li style="width: 190px;"><a style="float: left;" href="#" th:href="@{/mesEnfants}">Mes enfants </a></li>
+            <li class="active" style="width: 190px;"><a style="float: left;" href="#" th:href="@{/mesEnfants}">Mes enfants </a></li>
             <li style="width: 190px;"><a style="float: left;" href="#" th:href="@{/ajouterAnnonce}">Messages<span class="badge"></span></a></li>
-            <li class="active"><a href="#" th:href="@{/Avis}">Laisser un avis<span class="badge"></span></a></li>
+            <li><a href="#" th:href="@{/Avis}">Laisser un avis<span class="badge"></span></a></li>
             <li style="width: 190px;"><a style="float: left;" href="#" th:href="@{/ajouterAnnonce}">Reclamation<span class="badge"></span></a></li> 
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </div>
   </div>
-  <div class="col-sm-9">
 
-
-
+<div class="col-sm-9">
 
 
 <table class="table table-striped" style="color: black;">
   <thead>
-    <tr class="bg-primary">
-      <td scope="col">L'annoceur</td>
-      <td scope="col">Prenom de votre enfant</td>
-      <td scope="col">Date Annonce</td>
-      <td scope="col">Prix</td>
-      <td scope="col"></td>
+    <tr style="font-size:15px;"  class="bg-primary">
+      <td scope="col">Nom</td>
+      <td scope="col">Prénom</td>
+     <td scope="col">Niveau d'etude</td> 
+     <td scope="col">Age</td><td scope="col"></td>
     </tr>
   </thead>
-  <tbody>
-    <tr th:each="ListReservation:${ListReservation}">
-      <td th:text="${ListReservation.annonce.utilisateur.nom+' '+ListReservation.annonce.utilisateur.prenom}">@mdo</td>
-      <td th:text="${ListReservation.enfant.prenom}">Otto</td>
-      <td th:text="${ListReservation.annonce.date_annonce.toGMTString().substring(0, 11)}">Mark</td>
-      <td th:text="${ListReservation.annonce.prix}">Mark</td>
-      <td>
-     <a class="btn btn-success" th:href="@{/DonnerAvis}+'?idAnnonce='+${ListReservation.annonce.numero_annonce}" >Donner un avis</a></td>
-    
+    <tr th:each="ListeEnfants:${ListeEnfants}">
+    <td th:text="${ListeEnfants.nom}">Mark</td>
+     <td th:text="${ListeEnfants.prenom}">Mark</td>
+      <td th:text="${ListeEnfants.niveau_etude}">Otto</td>
+      <td th:text="${ListeEnfants.age}">@mdo</td>
+      <td style="right: 0px;">
+      <a class="btn btn-success" th:href="@{/AnnulerAnnonce}+'?idAnnonce='+${ListeEnfants.numero}">Modifier</a>
+     <a class="btn btn-danger" th:href="@{/AnnulerAnnonce}+'?idAnnonce='+${ListeEnfants.numero}">Annuler</a></td>
+   
     </tr>
     
-  </tbody>
+  
 </table>
+</div></div>
 </div>
-</div></div></div>
+</div>
 </body>
 </html>

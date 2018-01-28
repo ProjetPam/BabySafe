@@ -36,10 +36,7 @@ public class StatistiqueServiceImpl implements StatistiqueService {
 	public List<String> getStatistiqueParMois() {
 		Calendar c = Calendar.getInstance();
 		  int anneeEncours = c.get(Calendar.YEAR);
-		  //JsonArray jsonarr = new JsonArray();
-			
-			System.out.println(anneeEncours);
-			//HashMap<Integer, Double> statisticMonth = new HashMap<>();
+		 
 			
 			List<String> statisticMonth=new ArrayList<>();
 			List<String> periodeAnneeEnCours = new ArrayList<>();
@@ -54,9 +51,17 @@ public class StatistiqueServiceImpl implements StatistiqueService {
 			}
 			for(int i=0;i< periodeAnneeEnCours.size() ;i=i+2){
 				Date dat1 = new Date(periodeAnneeEnCours.get(i));
+				int vv = dat1.getMonth();
+				 String month = "wrong";
+				    DateFormatSymbols dfs = new DateFormatSymbols();
+				    String[] months = dfs.getMonths();
+				        if (vv >= 0 && vv <= 11 ) {
+				            month = months[vv];
+				        }
+				    
 				Date dat2 = new Date(periodeAnneeEnCours.get(i+1));
 				//statisticMonth.add("Le benifice de mois de "+dat1.toGMTString().substring(3, 11)+" est "+repositoryStatistique.getStatistiqueParMois(dat1,dat2)+" €");
-				statisticMonth.add(dat1.toGMTString().substring(3, 11)+""+repositoryStatistique.getStatistiqueParMois(dat1,dat2));
+				statisticMonth.add(month+"/"+repositoryStatistique.getStatistiqueParMois(dat1,dat2));
 				
 				
 				

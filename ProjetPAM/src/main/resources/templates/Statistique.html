@@ -32,13 +32,13 @@ layout:decorator="template1">
         </div>
         <div class="navbar-collapse collapse sidebar-navbar-collapse">
           <ul class="nav navbar-nav">
-           <li style="width: 190px;"><a style="float: left;" th:if="${session.nom=='zitouni'}" th:href="@{/getStatistique}"  >Statitstique</a></li>
+           <li style="width: 190px;" class="active"><a style="float: left;" th:if="${session.nom=='zitouni'}" th:href="@{/getStatistique}"  >Statitstique</a></li>
             <li style="width: 190px;"><a style="float: left;" th:if="${session.nom!='zitouni'}" href="#" >Profil  </a></li>
             <li ><a style="float: left;" href="#" th:href="@{/MesAnnonces}">Mes annoces</a></li>
             <li ><a href="#" th:href="@{/ListReservations}">Mes réservations</a></li>
             <li style="width: 190px;"><a style="float: left;" href="#" th:href="@{/HistoriqueReservations}">Mon Solde</a></li>
             <li><a href="#" th:href="@{/ajouterAnnonce}">Mes points</a></li>
-            <li style="width: 190px;"><a style="float: left;" href="#" th:href="@{/ajouterEnfant}">Mes enfants </a></li>
+            <li style="width: 190px;"><a style="float: left;" href="#" th:href="@{/mesEnfants}">Mes enfants </a></li>
             <li style="width: 190px;"><a style="float: left;" href="#" th:href="@{/ajouterAnnonce}">Messages<span class="badge"></span></a></li>
             <li><a href="#" th:href="@{/Avis}">Laisser un avis<span class="badge"></span></a></li>
             <li style="width: 190px;"><a style="float: left;" href="#" th:href="@{/ajouterAnnonce}">Reclamation<span class="badge"></span></a></li> 
@@ -59,7 +59,7 @@ layout:decorator="template1">
   <tbody>
     <tr th:each="ListStatistique:${ListStatistique}">
      <td style="color: maroon"  th:text="${ListStatistique.split('/')[0]}">Date depart</td>
-      <td style="color: maroon"  th:text="${ListStatistique.split('/')[1]}">Date depart</td>
+      <td style="color: maroon"  th:text="${ListStatistique.split('/')[1]+'0 €'}">Date depart</td>
     </tr>
     
   </tbody>

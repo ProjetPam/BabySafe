@@ -88,7 +88,7 @@ public class ControllerReservation {
 		int idUtilisateur=Integer.parseInt(session.getAttribute("idUtilisateur").toString());
 		reservationservice.PayerReservation(idAnnonce,idUtilisateur, idenfant, new Date(), prix, poinUtiliser,typePaiement);
 		
-		return "ListeAnnonces";
+		return this.ListeReservation(model,session);
 	}
 	
 	@RequestMapping("/HistoriqueReservations")
