@@ -30,14 +30,14 @@ public class ControllerEnfants  {
 	
 	@RequestMapping("/AddEnfant")
 	public String  AddEnfant(Model model,String Nom ,String Prénom,String NiveauEtud,String Age,
-			String Maladie,String Photo,HttpSession session){
+			String Maladie,String Photo,HttpSession session) throws Exception{
 		if(session.getAttribute("idUtilisateur") != null){
 		Enfant enfant=new Enfant(Nom, Prénom, NiveauEtud, Photo, Age, Maladie);
 
 		int idUtilisateur=Integer.parseInt(session.getAttribute("idUtilisateur").toString());
 		
 		enfantService.ajouterEnfants(enfant,idUtilisateur);
-		return "AjouterEnfant";
+		return this.mesEnfants(model, session);
 		}
 		return "Authentification";
 		

@@ -3,6 +3,7 @@ package org.pam.controlleur;
 import javax.servlet.http.HttpSession;
 
 import org.pam.model.Utilisateur;
+import org.pam.service.AnnonceService;
 import org.pam.service.UtilisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,9 @@ public class ControllerUtilisateur {
 	
 	@Autowired
 	private UtilisateurService utilisateurservice;
+	
+	@Autowired
+    private AnnonceService annonceService;
 	
 	
 	
@@ -49,7 +53,7 @@ utilisateurservice.enregistrement(utilisateur);
 	
 	@RequestMapping("/login")
 	public String login(Model model,String password,
-			                  String email,HttpSession session){
+			                  String email,HttpSession session) throws Exception{
 		
        Utilisateur utilisateur =utilisateurservice.authentitication(email, password);
 	if(utilisateur != null){
@@ -57,6 +61,7 @@ utilisateurservice.enregistrement(utilisateur);
 		session.setAttribute("nom",utilisateur.getNom());
 		session.setAttribute("prenom", utilisateur.getPrenom());
 		session.setAttribute("idUtilisateur",utilisateur.getNumero());
+		model.addAttribute("listAnnonce",annonceService.getAllAnnonces());
 		return "ListeAnnonces";
 	}
 		
